@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Collins Sey | Computer Science Researcher & Educator</title>
+    <meta name="description" content="Dr. Collins Sey - PhD in Software Engineering, Network Security and Blockchain Researcher, Lecturer at UESTC">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --deep-blue: #1e3a8a;
+            --gold: #f59e0b;
+            --sky-blue: #0ea5e9;
+            --dark-slate: #0f172a;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --text-gray: #64748b;
+            --border-gray: #e2e8f0;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+            --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-slate);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-gray);
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s var(--ease-elastic);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            animation: pulse 2s var(--ease-in-out-sine) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(30, 58, 138, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(30, 58, 138, 0); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-slate);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--sky-blue));
+            transition: width 0.3s var(--ease-out-expo);
+        }
+
+        .nav-link:hover {
+            color: var(--deep-blue);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--deep-blue);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--dark-slate);
+            transition: all 0.3s var(--ease-out-expo);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 2rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s var(--ease-out-expo);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu .nav-link {
+            display: block;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--light-gray) 0%, #ffffff 100%);
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--deep-blue) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--sky-blue) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, var(--gold) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s var(--ease-out-expo) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(14, 165, 233, 0.1));
+            color: var(--deep-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(30, 58, 138, 0.2);
+            animation: bounce 2s var(--ease-elastic) infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--dark-slate);
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gold);
+            opacity: 0.3;
+            border-radius: 4px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: expandLine 0.8s var(--ease-out-expo) 0.5s forwards;
+        }
+
+        @keyframes expandLine {
+            to { transform: scaleX(1); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: slideUp 0.8s var(--ease-out-expo) 0.2s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: slideUp 0.8s var(--ease-out-expo) 0.3s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: slideUp 0.8s var(--ease-out-expo) 0.4s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-out-expo);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--deep-blue);
+            border: 2px solid var(--deep-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--deep-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Image/Card - ENLARGED */
+        .hero-visual {
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideInRight 0.8s var(--ease-out-expo) 0.3s forwards;
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--deep-blue), var(--gold), var(--sky-blue));
+        }
+
+        /* ENLARGED Profile Image Container */
+        .profile-image-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-status {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: #10b981;
+            border: 4px solid white;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+        }
+
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-name {
+            font-size: 1.75rem;
+            color: var(--dark-slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--deep-blue), var(--gold), var(--sky-blue));
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            background: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-elastic);
+            border: 1px solid var(--border-gray);
+        }
+
+        .social-link:hover {
+            background: var(--deep-blue);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--deep-blue);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-tag::before,
+        .section-tag::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-tag::before { right: calc(100% + 10px); }
+        .section-tag::after { left: calc(100% + 10px); }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark-slate);
+            margin-bottom: 1rem;
+        }
+
+        /* Quick Stats Section */
+        .quick-stats {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            margin: -50px auto 0;
+            max-width: 1200px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .quick-stats.visible {
+            animation: slideUp 0.8s var(--ease-out-expo) forwards;
+        }
+
+        .quick-stat {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--deep-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .quick-stat:hover {
+            background: var(--light-gray);
+            transform: translateY(-5px);
+        }
+
+        .quick-stat:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quick-stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(14, 165, 233, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--deep-blue);
+            font-size: 1.5rem;
+            transition: all 0.3s var(--ease-elastic);
+        }
+
+        .quick-stat:hover .quick-stat-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            color: white;
+        }
+
+        .quick-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Specializations Grid */
+        .specializations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-gray);
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .spec-card.visible {
+            animation: slideUp 0.6s var(--ease-out-expo) forwards;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+            border-color: var(--deep-blue);
+        }
+
+        .spec-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(30, 58, 138, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .spec-card:hover::after {
+            opacity: 1;
+        }
+
+        .spec-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s var(--ease-elastic);
+        }
+
+        .spec-card:hover .spec-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .spec-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-slate);
+        }
+
+        .spec-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Timeline for Experience - IMPROVED BOUNCING STEPS */
+        .timeline {
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--deep-blue), var(--sky-blue), var(--gold));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        .timeline-item.visible {
+            animation: slideInRight 0.6s var(--ease-out-expo) forwards;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid var(--deep-blue);
+            border-radius: 50%;
+            transform: translateX(-7px);
+            transition: all 0.3s var(--ease-elastic);
+        }
+
+        .timeline-item:hover::before {
+            background: var(--gold);
+            transform: translateX(-7px) scale(1.3);
+            border-color: var(--gold);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.2));
+            color: var(--gold);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            color: var(--dark-slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-org {
+            color: var(--sky-blue);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* IMPROVED Bouncing Step Numbers */
+        .step-number {
+            position: absolute;
+            left: -4.5rem;
+            top: -0.75rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--deep-blue), var(--sky-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+            z-index: 10;
+            animation: bounce-step-enhanced 2.5s var(--ease-bounce) infinite;
+            animation-delay: calc(var(--step) * 0.4s);
+        }
+
+        /* Shadow ring for depth */
+        .step-number::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: pulse-ring 2.5s ease-out infinite;
+            animation-delay: calc(var(--step) * 0.4s);
+        }
+
+        @keyframes bounce-step-enhanced {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+                box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+            }
+            25% { 
+                transform: translateY(-12px) scale(1.05); 
+                box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+            }
+            50% { 
+                transform: translateY(0) scale(1); 
+                box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+            }
+            75% { 
+                transform: translateY(-6px) scale(1.02); 
+                box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2); 
+                opacity: 0;
+            }
+        }
+
+        /* Hover state for step numbers */
+        .timeline-item:hover .step-number {
+            animation-play-state: paused;
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--gold), #fbbf24);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-slate);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--sky-blue);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            /* Adjusted profile size for tablet */
+            .profile-image-container {
+                width: 240px;
+                height: 240px;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                padding: 100px 1.5rem 60px;
+            }
+
+            /* Adjusted profile size for mobile */
+            .profile-image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-card {
+                padding: 2rem;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+                margin-top: 2rem;
+                padding: 2rem;
+            }
+
+            .timeline {
+                padding-left: 3rem;
+            }
+
+            .step-number {
+                left: -3.5rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .step-number::before {
+                width: 48px;
+                height: 48px;
+            }
+
+            section {
+                padding: 60px 1.5rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="Home">
+                <div class="logo-icon">CS</div>
+                <span>Collins Sey</span>
+            </a>
+
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
+                <li role="none"><a href="#publications" class="nav-link" role="menuitem">Publications</a></li>
+                <li role="none"><a href="#teaching" class="nav-link" role="menuitem">Teaching</a></li>
+                <li role="none"><a href="#research" class="nav-link" role="menuitem">Research Team</a></li>
+                <li role="none"><a href="#collaborators" class="nav-link" role="menuitem">Collaborators</a></li>
+                <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
+                <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu" role="menu">
+            <a href="#home" class="nav-link" role="menuitem">Home</a>
+            <a href="#publications" class="nav-link" role="menuitem">Publications</a>
+            <a href="#teaching" class="nav-link" role="menuitem">Teaching</a>
+            <a href="#research" class="nav-link" role="menuitem">Research Team</a>
+            <a href="#collaborators" class="nav-link" role="menuitem">Collaborators</a>
+            <a href="#projects" class="nav-link" role="menuitem">Projects</a>
+            <a href="#contact" class="nav-link" role="menuitem">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span>PhD in Software Engineering</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Dr. Collins <span class="highlight">Sey</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Network Security, Blockchain & AI Researcher
+                </p>
+                
+                <p class="hero-description">
+                    Accomplished computer science professional with 10+ years of industry and academic experience. 
+                    Specializing in IoT Security, Smart City Technologies, and Machine Learning. Postdoctoral Researcher 
+                    at UESTC, advancing the frontiers of secure computing.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#publications" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i>
+                        View Publications
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Get in Touch
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/collins-sey-a9304982" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:clinsey2@yahoo.com" class="social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Google Scholar">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://wechat.com" class="social-link" aria-label="WeChat">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="https://wa.me/233542411048" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="profile-card">
+                    <div class="profile-image-container">
+                        <div class="profile-ring"></div>
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="Dr. Collins Sey" class="profile-image">
+                        <div class="profile-status" aria-label="Available for collaboration"></div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h2 class="profile-name">Dr. Collins Sey</h2>
+                        <p class="profile-title">Postdoctoral Researcher @ UESTC</p>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="16">0</span>
+                            <span class="stat-label">Publications</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="10">0</span>
+                            <span class="stat-label">Years Exp.</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="4">0</span>
+                            <span class="stat-label">Degrees</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats Section -->
+    <div class="quick-stats" id="quickStats">
+        <div class="quick-stat">
+            <div class="quick-stat-icon">
+                <i class="fas fa-university"></i>
+            </div>
+            <div class="quick-stat-number" data-target="3">0</div>
+            <div class="quick-stat-label">Academic Degrees</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="quick-stat-number" data-target="16">0</div>
+            <div class="quick-stat-label">Research Papers</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-icon">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <div class="quick-stat-number" data-target="6">0</div>
+            <div class="quick-stat-label">Major Projects</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="quick-stat-number" data-target="6000">0</div>
+            <div class="quick-stat-label">Students Mentored</div>
+        </div>
+    </div>
+
+    <!-- Specializations Section -->
+    <section id="specializations">
+        <div class="section-header">
+            <span class="section-tag">Expertise</span>
+            <h2 class="section-title">Research Specializations</h2>
+            <p style="color: var(--text-gray); max-width: 600px; margin: 0 auto;">
+                Bridging the gap between theoretical research and practical applications in secure computing
+            </p>
+        </div>
+
+        <div class="specializations">
+            <div class="spec-card" style="--delay: 0">
+                <div class="spec-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3 class="spec-title">Blockchain Technology</h3>
+                <p class="spec-desc">
+                    Developing scalable, malware-proof architectures for IoT firmware updates and secure data sharing in decentralized networks.
+                </p>
+            </div>
+
+            <div class="spec-card" style="--delay: 1">
+                <div class="spec-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="spec-title">Network Security</h3>
+                <p class="spec-desc">
+                    Creating tamper-proofing data protection models for Internet of Vehicle networks and cloud-based IoT environments.
+                </p>
+            </div>
+
+            <div class="spec-card" style="--delay: 2">
+                <div class="spec-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="spec-title">Machine & Deep Learning</h3>
+                <p class="spec-desc">
+                    Applying AI to medical image harmonization, neurodegenerative disease classification, and predictive modeling.
+                </p>
+            </div>
+
+            <div class="spec-card" style="--delay: 3">
+                <div class="spec-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h3 class="spec-title">Smart City & IoT</h3>
+                <p class="spec-desc">
+                    Researching security protocols for smart city management, access control, and authentication in connected environments.
+                </p>
+            </div>
+
+            <div class="spec-card" style="--delay: 4">
+                <div class="spec-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3 class="spec-title">Cloud Computing</h3>
+                <p class="spec-desc">
+                    Designing secure architectures for cloud-based IoT environments and distributed systems management.
+                </p>
+            </div>
+
+            <div class="spec-card" style="--delay: 5">
+                <div class="spec-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="spec-title">Systems Engineering</h3>
+                <p class="spec-desc">
+                    Full-stack development of secure web applications, database systems, and enterprise management platforms.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Position Timeline -->
+    <section id="experience">
+        <div class="section-header">
+            <span class="section-tag">Career</span>
+            <h2 class="section-title">Current Positions</h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item" style="--step: 0">
+                <span class="step-number">1</span>
+                <div class="timeline-content">
+                    <span class="timeline-date">March 2024 - Present</span>
+                    <h3 class="timeline-title">Postdoctoral Researcher</h3>
+                    <div class="timeline-org">
+                        <i class="fas fa-university"></i>
+                        University of Electronic Science and Technology of China (UESTC)
+                    </div>
+                    <p class="timeline-desc">
+                        School of Information and Software Engineering. Researching security protocols for secure data exchange, 
+                        access control, and authentication in cloud-based IoT environments. Mentoring graduate students on 
+                        academic writing and research analysis.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item" style="--step: 1">
+                <span class="step-number">2</span>
+                <div class="timeline-content">
+                    <span class="timeline-date">September 2023 - March 2024</span>
+                    <h3 class="timeline-title">Research Assistant</h3>
+                    <div class="timeline-org">
+                        <i class="fas fa-university"></i>
+                        UESTC Research Q&A Forum
+                    </div>
+                    <p class="timeline-desc">
+                        Provided guidance to international students across undergraduate, master's, and Ph.D. levels in 
+                        research methodologies. Assisted in formulating research questions and developing academic resources.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item" style="--step: 2">
+                <span class="step-number">3</span>
+                <div class="timeline-content">
+                    <span class="timeline-date">2019 - 2023</span>
+                    <h3 class="timeline-title">PhD Researcher</h3>
+                    <div class="timeline-org">
+                        <i class="fas fa-graduation-cap"></i>
+                        Information Physical Computing Center, UESTC
+                    </div>
+                    <p class="timeline-desc">
+                        Dissertation: "Research on Using Blockchain to Enhance IoT Security Technology in Smart City Management." 
+                        Developed blockchain-enabled secure architectures for IoT networks in smart cities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> clinsey2@yahoo.com</p>
+                <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> +86 199 8209 1630</p>
+                <p><i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i> +233 54 241 1048</p>
+                <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i> Chengdu, Sichuan, China</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#publications">Publications</a></p>
+                <p><a href="#teaching">Teaching</a></p>
+                <p><a href="#research">Research Team</a></p>
+                <p><a href="#projects">Projects</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p><a href="https://linkedin.com/in/collins-sey-a9304982" target="_blank">LinkedIn</a></p>
+                <p><a href="#">Google Scholar</a></p>
+                <p><a href="#">ResearchGate</a></p>
+                <p><a href="#">WeChat: ClinTech</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Office</h3>
+                <p>School of Information and Software Engineering</p>
+                <p>University of Electronic Science and Technology of China</p>
+                <p>2006 Xiyuan Ave, West Hi-Tech Zone</p>
+                <p>Chengdu, Sichuan 611731, P.R. China</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Dr. Collins Sey. All rights reserved. | Designed with precision and purpose.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate numbers
+                    if (entry.target.querySelectorAll('.quick-stat-number').length) {
+                        entry.target.querySelectorAll('.quick-stat-number').forEach(stat => {
+                            animateNumber(stat);
+                        });
+                    }
+                    
+                    if (entry.target.classList.contains('stat-number')) {
+                        animateNumber(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.quick-stats').forEach(el => observer.observe(el));
+        document.querySelectorAll('.spec-card').forEach(el => observer.observe(el));
+        document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+        document.querySelectorAll('.stat-number').forEach(el => observer.observe(el));
+
+        // Number animation function
+        function animateNumber(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Stagger animation for specializations
+        const specCards = document.querySelectorAll('.spec-card');
+        specCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Add parallax effect to hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-bg-pattern');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
