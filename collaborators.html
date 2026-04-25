@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborators | Dr. Collins Sey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2c5282;
+            --accent: #d4a574;
+            --accent-light: #e8c9a8;
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            overflow-y: auto;
+            transition: var(--transition);
+        }
+
+        .sidebar-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(30, 58, 95, 0.2); }
+            50% { box-shadow: 0 15px 40px rgba(30, 58, 95, 0.35); }
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .profile-photo-container:hover .profile-photo {
+            transform: scale(1.05);
+        }
+
+        .sidebar-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            animation: fade-in-up 0.8s ease-out;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sidebar-title {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            animation: fade-in-up 0.8s ease-out 0.1s both;
+        }
+
+        .sidebar-title-sub {
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            animation: fade-in-up 0.8s ease-out 0.1s both;
+        }
+
+        .research-focus {
+            margin: 0.8rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            color: white;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        .research-focus h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .research-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .research-tag:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Additional Expertise Section */
+        .additional-expertise {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            animation: fade-in-up 0.8s ease-out 0.25s both;
+        }
+
+        .additional-expertise h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.775rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .expertise-item:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .expertise-item i {
+            color: var(--accent);
+            margin-top: 0.25rem;
+            font-size: 0.5rem;
+        }
+
+        .expertise-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Sidebar Social Links */
+        .sidebar-social {
+            margin: 1.5rem 0;
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            animation: fade-in-up 0.8s ease-out 0.35s both;
+        }
+
+        .sidebar-social h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .sidebar-social-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .sidebar-social-link {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+
+        .sidebar-social-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .sidebar-contact {
+            margin-top: auto;
+            padding-top: 1.18rem;
+            border-top: 1px solid var(--border);
+            animation: fade-in-up 0.8s ease-out 0.4s both;
+        }
+
+        .sidebar-contact h4 {
+            font-size: 0.975rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.775rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            width: 20px;
+            color: var(--accent);
+        }
+
+        /* Mobile Sidebar Toggle */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 101;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(30, 58, 95, 0.05);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 20px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            z-index: 98;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .mobile-nav.active {
+            max-height: 500px;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: rgba(30, 58, 95, 0.05);
+            color: var(--primary);
+            padding-left: 1.5rem;
+        }
+
+        .mobile-nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            color: var(--accent);
+        }
+
+        /* Page Content */
+        .page-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            animation: expand-width 1s ease-out 0.5s both;
+        }
+
+        @keyframes expand-width {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            font-weight: 300;
+        }
+
+        /* Search Controls */
+        .search-controls {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: var(--transition);
+            background: var(--bg-primary);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-chip:hover,
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Sort Controls */
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+
+        .sort-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Stats Section */
+        .collaborator-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Collaborator Categories */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-title i {
+            color: var(--accent);
+        }
+
+        .category-count {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Collaborator Grid - 2 per row */
+        .collaborator-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Collaborator Card - Horizontal Layout with Portrait Photo (Passport Size) */
+        .collaborator-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 0.5s ease-out forwards;
+            display: flex;
+            flex-direction: row;
+            height: 190px;
+            cursor: pointer;
+        }
+
+        .collaborator-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+            transform: translateX(5px);
+        }
+
+        /* Passport-size photo container - 3:4 aspect ratio, portrait orientation */
+        .collaborator-photo-container {
+            width: 135px;
+            height: 190px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .collaborator-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: var(--transition);
+        }
+
+        .collaborator-card:hover .collaborator-photo {
+            transform: scale(1.03);
+        }
+
+        .collaborator-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .collaborator-type-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .collaborator-type-badge.research {
+            background: rgba(30, 58, 95, 0.9);
+            color: white;
+        }
+
+        .collaborator-type-badge.project {
+            background: rgba(212, 165, 116, 0.9);
+            color: white;
+        }
+
+        .collaborator-type-badge.leadership {
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+        }
+
+        .collaborator-info {
+            padding: 1rem 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .collaborator-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .collaborator-role {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .collaborator-institution {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.6rem;
+        }
+
+        .collaborator-institution i {
+            color: var(--accent);
+            width: 14px;
+            font-size: 0.7rem;
+        }
+
+        .collaborator-bio {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .collaborator-bio-preview {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .collaborator-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .collaborator-email {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70%;
+        }
+
+        .collaborator-email:hover {
+            color: var(--primary);
+        }
+
+        .collaborator-email i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .collaborator-links {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .collaborator-link {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.75rem;
+        }
+
+        .collaborator-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #f0f4f8 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-photo-container {
+            width: 150px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .modal-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .modal-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .modal-header-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-name {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .modal-role {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-institution {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-institution i {
+            color: var(--accent);
+        }
+
+        .modal-type-badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .modal-type-badge.research {
+            background: rgba(30, 58, 95, 0.1);
+            color: var(--primary);
+        }
+
+        .modal-type-badge.project {
+            background: rgba(212, 165, 116, 0.2);
+            color: var(--accent);
+        }
+
+        .modal-type-badge.leadership {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-section-title i {
+            color: var(--accent);
+        }
+
+        .modal-bio {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .modal-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .modal-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .modal-contact-item:hover {
+            background: var(--bg-primary);
+            color: var(--primary);
+        }
+
+        .modal-contact-item i {
+            width: 20px;
+            color: var(--accent);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .modal-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .modal-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .modal-link i {
+            color: var(--accent);
+        }
+
+        .modal-link:hover i {
+            color: white;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--border);
+        }
+
+        .no-results h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .collaborator-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .collaborator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collaborator-card {
+                height: 160px;
+            }
+
+            .collaborator-photo-container {
+                width: 120px;
+                height: 160px;
+            }
+
+            .category-header {
+                flex-wrap: wrap;
+            }
+
+            .modal-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .modal-photo-container {
+                width: 120px;
+                height: 160px;
+            }
+
+            .modal-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Page Transition */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: 10000;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .page-transition.active {
+            transform: translateY(0);
+        }
+
+        /* Focus styles */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Hidden class for filtering */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container" role="progressbar" aria-label="Page scroll progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+
+    <!-- Mobile Sidebar Toggle -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-user"></i>
+    </button>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar" role="complementary" aria-label="Profile sidebar">
+            <div class="sidebar-profile">
+                <div class="profile-photo-container">
+                    <img src="img/Collins Sey_CL.jpg" 
+                         alt="Dr. Collins Sey - Profile Photo" 
+                         class="profile-photo">
+                </div>
+                <h2 class="sidebar-name">Dr. Collins Sey</h2>
+                <p class="sidebar-title">Lecturer & Researcher</p>
+                <p class="sidebar-title-sub">Oxford Brookes College</p>
+            </div>
+            
+            <!-- Sidebar Social Links -->
+            <div class="sidebar-social">
+                <h3>Connect</h3>
+                <div class="sidebar-social-links">
+                    <a href="https://scholar.google.com/citations?user=-U8jzsAAAAAJ&hl=en" class="sidebar-social-link" aria-label="Google Scholar" target="_blank">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/collins-sey-a9304982" class="sidebar-social-link" aria-label="LinkedIn" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Collins-Sey?ev=hdr_xprf" class="sidebar-social-link" aria-label="ResearchGate" target="_blank">
+                        <i class="fas fa-book"></i>
+                    </a>
+                    <a href="https://clinsey.github.io/" class="sidebar-social-link" aria-label="GitHub" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:collins.sey@zy.cdut.edu.cn" class="sidebar-social-link" aria-label="Email" target="_blank">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="research-focus">
+                <h3>Research Focus</h3>
+                <div class="research-tags">
+                    <span class="research-tag">Network Security</span>
+                    <span class="research-tag">Blockchain</span>
+                    <span class="research-tag">Smart City</span>
+                    <span class="research-tag">IoT</span>
+                    <span class="research-tag">Cloud Computing</span>
+                    <span class="research-tag">Systems Engineering</span>
+                    <span class="research-tag">AI Ethics</span>
+                    <span class="research-tag">Machine Learning</span>
+                    <span class="research-tag">Deep Learning</span>
+                </div>
+            </div>
+
+            <!-- Additional Expertise Section -->
+            <div class="additional-expertise">
+                <h3>Additional Skills</h3>
+                <ul class="expertise-list">
+                    <li class="expertise-item">
+                        <i class="fas fa-circle"></i>
+                        <span>Research Methods</span>
+                    </li>
+                    <li class="expertise-item">
+                        <i class="fas fa-circle"></i>
+                        <span>Student Mentorship and Academic Guidance</span>
+                    </li>
+                    <li class="expertise-item">
+                        <i class="fas fa-circle"></i>
+                        <span>Curriculum Development</span>
+                    </li>
+                    <li class="expertise-item">
+                        <i class="fas fa-circle"></i>
+                        <span>Training and Professional Development</span>
+                    </li>
+                    <li class="expertise-item">
+                        <i class="fas fa-circle"></i>
+                        <span>Project Coordination</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-contact">
+                <h4>Contact Information</h4>
+                <div class="contact-item">
+                    <i class="fas fa-university"></i>
+                    <span>Chengdu University of Technology</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-building"></i>
+                    <span>Dept. of Computer Sci & Software Eng</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Building 8, Room 8204</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <nav class="top-nav" role="navigation" aria-label="Main navigation">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>CS</span>
+                    </a>
+                    
+                    <!-- Desktop Navigation -->
+                    <ul class="nav-links" role="menubar">
+                        <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+                        <li role="none"><a href="publications.html" class="nav-link" role="menuitem">Publications</a></li>
+                        <li role="none"><a href="teaching.html" class="nav-link" role="menuitem">Teaching</a></li>
+                        <li role="none"><a href="research-team.html" class="nav-link" role="menuitem">Research Team</a></li>
+                        <li role="none"><a href="collaborators.html" class="nav-link active" role="menuitem">Collaborators</a></li>
+                        <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
+                        <li role="none"><a href="gallery.html" class="nav-link" role="menuitem">Gallery</a></li>
+                        <!--<li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>-->
+                    </ul>
+
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle mobile navigation" aria-expanded="false">
+                        <i class="fas fa-bars" id="mobileNavIcon"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="publications.html" class="mobile-nav-link"><i class="fas fa-book"></i> Publications</a></li>
+                    <li><a href="teaching.html" class="mobile-nav-link"><i class="fas fa-chalkboard-teacher"></i> Teaching</a></li>
+                    <li><a href="research-team.html" class="mobile-nav-link"><i class="fas fa-users"></i> Research Team</a></li>
+                    <li><a href="collaborators.html" class="mobile-nav-link active"><i class="fas fa-handshake"></i> Collaborators</a></li>
+                    <li><a href="projects.html" class="mobile-nav-link"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                    <li><a href="gallery.html" class="mobile-nav-link"><i class="fas fa-images"></i> Gallery</a></li>
+                    <!--<li><a href="contact.html" class="mobile-nav-link"><i class="fas fa-envelope"></i> Contact</a></li>-->
+                </ul>
+            </nav>
+
+            <!-- Collaborators Section -->
+            <section class="page-section" id="collaborators" aria-label="Collaborators section">
+                <div class="section-header">
+                    <h1 class="section-title">Collaborators</h1>
+                    <p class="section-subtitle">Research partners, project collaborators, and leadership colleagues</p>
+                </div>
+
+                <!-- Search Controls -->
+                <div class="search-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name, institution, or research area...">
+                    </div>
+                    <div class="search-filters">
+                        <span class="filter-chip active" data-filter="all">All Collaborators</span>
+                        <span class="filter-chip" data-filter="research">Research</span>
+                        <span class="filter-chip" data-filter="project">Project</span>
+                        <span class="filter-chip" data-filter="leadership">Leadership</span>
+                    </div>
+                </div>
+
+                <!-- Sort Controls -->
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="institution">Institution</option>
+                        <option value="recent">Most Recent</option>
+                    </select>
+                </div>
+
+                <!-- Stats -->
+                <!--<div class="collaborator-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <span class="stat-number" id="totalResearch">0</span>
+                        <span class="stat-label">Research Collaborators</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <span class="stat-number" id="totalProject">0</span>
+                        <span class="stat-label">Project Partners</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <span class="stat-number" id="totalLeadership">0</span>
+                        <span class="stat-label">Leadership</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <span class="stat-number" id="totalInstitutions">0</span>
+                        <span class="stat-label">Institutions</span>
+                    </div>
+                </div>-->
+
+                <!-- Research Collaborators Section -->
+                <div class="category-section" id="researchSection" data-category="research">
+                    <div class="category-header">
+                        <h2 class="category-title">
+                            <i class="fas fa-flask"></i>
+                            Research Collaborators
+                        </h2>
+                        <span class="category-count" id="researchCount">0</span>
+                    </div>
+                    <div class="collaborator-grid" id="researchGrid">
+                        <!-- Research Collaborator 1 -->
+                        <article class="collaborator-card" data-name="Dr. Linda Delali Fiasam" data-institution="Stirling College, Chengdu University" data-type="research" data-date="2023" data-full-bio="Dr. Linda Delali Fiasam is a lecturer and researcher at the Department of Data Science and Big Data Technology, Stirling College, Chengdu University, a Sino-British joint college. She specializes in deep learning, medical image analysis, computer vision, and domain generalization. Her research has addressed problems such as multi-site Alzheimer’s disease classification via domain contrastive learning, MRI harmonization, and hybrid models for medical diagnostics." data-email="linda.fiasam@stir.ac.uk" data-photo="img/collaborators/linda.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Linda.jpg" alt="Dr. Linda Delali Fiasam" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Linda Delali Fiasam</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Stirling College, Chengdu University</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in deep learning, medical image analysis, computer vision, and domain generalization for the diagnosis of neurodegenerative diseases.</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="collaborator-card" data-name="Dr. Isaac Adjei-Mensah" data-institution="Yango University" data-type="research" data-date="2023" data-full-bio="Dr. Isaac Adjei-Mensah is a lecturer and researcher at the School of Artificial Intelligence, Yango University, Fuzhou, China. His research focuses on medical imaging, federated learning, and machine learning, emphasizing intelligent systems that improve diagnostic accuracy and data privacy. He also explores distributed and large-scale learning and their applications in healthcare and computational intelligence.." data-email="iadjeimensah@ygu.edu.cn" data-photo="img/collaborators/Isaac.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Isaac.jpg" alt="Dr. Isaac Adjei-Mensah" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Isaac Adjei-Mensah</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Yango University, Fuzhou</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in medical imaging, federated learning, and scalable machine learning for privacy-preserving healthcare and intelligent diagnostic systems..</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="collaborator-card" data-name="Dr. Isaac Osei Agyemang" data-institution="Stirling College, Chengdu University" data-type="research" data-date="2023" data-full-bio="Dr. Isaac Osei Agyemang is a computer scientist specializing in deep learning, computer vision, and structural health monitoring. He serves as a lecturer and researcher at Stirling College, Chengdu University, focusing on AI-driven engineering, medical imaging, and micro-drone applications, with several peer-reviewed publications in top journals." data-email="ioa2@stir.ac.uk" data-photo="img/collaborators/Ike3.png">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Ike3.png" alt="Dr. Isaac Osei Agyemang" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Isaac Osei Agyemang</h3>
+                                <p class="collaborator-role">Lecturer & Research Associate</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Stirling College, Chengdu University</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in in deep learning, computer vision, and structural health monitoring with applications in micro-robotics and medical imaging..</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="collaborator-card" data-name="Dr. Adu Asare Baffour" data-institution="University of Missouri-Kansas City (UMKC)" data-type="research" data-date="2023" data-full-bio="Dr. Adu Asare Baffour is affiliated with the University of Missouri-Kansas City (UMKC), where he serves as an Instructor. He also works at the intersection of machine learning, image recognition, and TinyML (machine learning for edge / embedded systems)." data-email="abanx@umkc.edu" data-photo="img/collaborators/BaffuorAduAsare.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/BaffuorAduAsare.jpg" alt="Dr. Adu Asare Baffour" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Adu Asare Baffour</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>University of Missouri-Kansas City (UMKC)</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in machine learning, image recognition, and TinyML for edge and embedded intelligent systems..</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="collaborator-card" data-name="Dr. Chiagoziem Chima" data-institution="Oxford Brookes College, Chengdu University of Technology" data-type="research" data-date="2023" data-full-bio="Dr. Chima is a lecturer and researcher at Chengdu University of Technology with extensive teaching experience in diverse educational settings. He has published several peer reviewed papers in leading journals, including Applied Energy, Renewable Energy, and Biomedical Signal Processing and Control." data-email="chiagoziem.chima@zy.cdut.edu.cn" data-photo="img/collaborators/Chima.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Chima.jpg" alt="Dr. Chiagoziem Chima" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Chiagoziem Chima</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Oxford Brookes College, CDUT</span>
+                                </div>
+                                <p class="collaborator-bio">Research focuses on energy systems, renewable energy, biomedical signal processing, and applied interdisciplinary research.</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <article class="collaborator-card" data-name="Dr. Kwame Omono Asamoah" data-institution="Ningbo China Institute for Supply Chain Innovation" data-type="research" data-date="2023" data-full-bio="Dr. Kwame Omono Asamoah is a researcher and educator specializing in artificial intelligence, machine learning, blockchain technology, and big data security. He holds a PhD in Computer Science and Technology from the University of Electronic Science and Technology of China and is currently affiliated with the Ningbo China Institute for Supply Chain Innovation, MIT Global Network, where his work focuses on AI driven supply chain analytics, blockchain systems, and secure data driven decision making." data-email="chiagoziem.chima@zy.cdut.edu.cn" data-photo="img/collaborators/Kwame_Omono_Asamoah.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Kwame_Omono_Asamoah.jpg" alt="Dr. Kwame Omono Asamoah" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Kwame Omono Asamoah</h3>
+                                <p class="collaborator-role">Postdoctoral Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Ningbo China Institute for Supply Chain Innovation</span>
+                                </div>
+                                <p class="collaborator-bio">Research focuses on AI driven supply chain analytics, blockchain systems, and secure data driven decision making..</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <article class="collaborator-card" data-name="Dr. Esther Stacy E.B. Aggrey" data-institution="Stirling College, Chengdu University" data-type="research" data-date="2023" data-full-bio="Dr. Esther Stacy E.B. Aggrey is a lecturer and researcher at the Department of Data Science and Big Data Technology, Stirling College, Chengdu University, a Sino-British joint college. Her work focuses on machine learning, deep learning, medical imaging, explainable AI, and education in computing." data-email="esther.aggrey@stir.ac.uk" data-photo="img/collaborators/Stacy.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Stacy2.jpg" alt="Dr. Esther Stacy E.B. Aggrey" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Esther Stacy E.B. Aggrey</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Stirling College, Chengdu University</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in machine learning, deep learning, medical imaging, explainable AI, and education in computing..</p>
+                                <!--<span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>-->
+                                <div class="collaborator-footer">
+                                    <!--<a href="mailto:s.chen@tsinghua.edu.cn" class="collaborator-email" onclick="event.stopPropagation()">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>s.chen@tsinghua.edu.cn</span>
+                                    </a>-->
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        
+                        <!--<article class="collaborator-card" data-name="Frank Addo Mante" data-institution="Freelance, United States" data-type="research" data-date="2023" data-full-bio="Frank Addo Mante is a Vulnerability Management Engineer and IT Lead at Eco Amet Solutions, with expertise in network security, AI, machine learning, website deployment, and cybersecurity practices. His professional focus includes vulnerability assessment, security testing, and AI driven automation. He holds certifications such as Cisco AI Technical Practitioner and Vulnerability Management with Nessus, reflecting his strong foundation in cybersecurity practices and emerging intelligent systems." data-email="frankmante@gmail.com" data-photo="img/collaborators/Frank.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Frank.jpg" alt="Frank Addo Mante" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Frank Addo Mante</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Freelance, United States</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in vulnerability management, network security, AI-driven automation, machine learning, and cybersecurity testing.</p>
+                                
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>-->
+
+                        <!--<article class="collaborator-card" data-name="Prof. Sarah Chen" data-institution="Tsinghua University" data-type="research" data-date="2023" data-full-bio="xxxxxxx." data-email="xxxxxxxxxx" data-photo="img/collaborators/Isaac.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/xxxxxxx.jpg" alt="Prof. Sarah Chen" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Prof. Sarah Chen</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Tsinghua University, Beijing</span>
+                                </div>
+                                <p class="collaborator-bio">Leading expert in blockchain security and distributed systems. Co-author on 5 publications regarding smart contract vulnerabilities.</p>
+                                
+                                <div class="collaborator-footer">
+                                   
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>-->
+
+
+                        <!--
+
+                        <article class="collaborator-card" data-name="Prof. Sarah Chen" data-institution="Tsinghua University" data-type="research" data-date="2023" data-full-bio="xxxxxxx." data-email="xxxxxxxxxx" data-photo="img/collaborators/Isaac.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/xxxxxxx.jpg" alt="Prof. Sarah Chen" class="collaborator-photo">
+                                <span class="collaborator-type-badge research">Research</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Prof. Sarah Chen</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Tsinghua University, Beijing</span>
+                                </div>
+                                <p class="collaborator-bio">Leading expert in blockchain security and distributed systems. Co-author on 5 publications regarding smart contract vulnerabilities.</p>
+                                
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>-->
+
+
+                        
+                        <!--#########################################################################-->
+
+                        
+                    </div>
+                </div>
+
+                <!-- Project Collaborators Section -->
+                <div class="category-section" id="projectSection" data-category="project">
+                    <div class="category-header">
+                        <h2 class="category-title">
+                            <i class="fas fa-project-diagram"></i>
+                            Project Collaborators
+                        </h2>
+                        <span class="category-count" id="projectCount">0</span>
+                    </div>
+                    <div class="collaborator-grid" id="projectGrid">
+                        <!-- Project Collaborator 1 -->
+                        <article class="collaborator-card" data-name="Stephen Ouarcoo" data-institution="BrainWave AfricaTech Limited" data-type="project" data-date="2024" data-full-bio="Stephen Ouarcoo is a System Engineer and IT Operations and Infrastructure Specialist with experience in managing enterprise systems and supporting organizational technology environments. With a background that includes experience at IBM, he has developed strong capabilities in IT operations, project management, and infrastructure support. He brings expertise in IT asset management, data analysis, and analytical problem solving, alongside a solid foundation in leadership, customer service, and organizational effectiveness. His work focuses on ensuring efficient IT service delivery while supporting business growth through reliable and scalable technology solutions." data-email="stephen.quarcoo@gmail.com" data-photo="img/collaborators/Stephen.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Stephen.jpg" alt="Stephen Ouarcoo" class="collaborator-photo">
+                                <span class="collaborator-type-badge project">Project</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Stephen Ouarcoo</h3>
+                                <p class="collaborator-role">System Engineer | IT Operations & Infrastructure Specialist</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>BrainWave AfricaTech Limited</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in IT operations, infrastructure management, IT service delivery, data analysis, and scalable enterprise technology solutions.</p>
+                                
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="Website" onclick="event.stopPropagation()"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project Collaborator 2 -->
+                        <article class="collaborator-card" data-name="Frank Addo Mante" data-institution="Freelance, United States" data-type="project" data-date="2023" data-full-bio="Frank Addo Mante is a Vulnerability Management Engineer and IT Lead at Eco Amet Solutions, with expertise in network security, AI, machine learning, website deployment, and cybersecurity practices. His professional focus includes vulnerability assessment, security testing, and AI driven automation. He holds certifications such as Cisco AI Technical Practitioner and Vulnerability Management with Nessus, reflecting his strong foundation in cybersecurity practices and emerging intelligent systems." data-email="frank_addo_mante@gmail.com" data-photo="img/collaborators/Frank.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Frank.jpg" alt="Frank Addo Mante" class="collaborator-photo">
+                                <span class="collaborator-type-badge project">Project</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Frank Addo Mante</h3>
+                                <p class="collaborator-role">Vulnerability Management Engineer</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-building"></i>
+                                    <span>Freelance, United States</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in vulnerability management, network security, AI-driven automation, machine learning, and cybersecurity testing.</p>
+                                
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="https://www.linkedin.com/in/frank-mante/" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project Collaborator 3 --
+                        <article class="collaborator-card" data-name="Ms. Anna Martinez" data-institution="Siemens AG" data-type="project" data-date="2023" data-full-bio="xxxx." data-email="anna.martinez@siemens.com" data-photo="img/collaborators/xxxxxxx.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Frank.jpg" alt="Ms. Anna Martinez" class="collaborator-photo">
+                                <span class="collaborator-type-badge project">Project</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Ms. Anna Martinez</h3>
+                                <p class="collaborator-role">Principal Security Architect</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-building"></i>
+                                    <span>Siemens AG, Germany</span>
+                                </div>
+                                <p class="collaborator-bio">Industry partner for the Industrial IoT Security Project. 15 years of experience in securing industrial control systems.</p>
+                                
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="Website" onclick="event.stopPropagation()"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project Collaborator 4 -->
+                        
+
+                    </div>
+                </div>
+
+                <!-- Leadership Collaborators Section -->
+                <div class="category-section" id="leadershipSection" data-category="leadership">
+                    <div class="category-header">
+                        <h2 class="category-title">
+                            <i class="fas fa-users-cog"></i>
+                            Leadership Collaborators
+                        </h2>
+                        <span class="category-count" id="leadershipCount">0</span>
+                    </div>
+                    <div class="collaborator-grid" id="leadershipGrid">
+                        <!-- Leadership Collaborator 1 -->
+                        <article class="collaborator-card" data-name="Dr. Francisca Arboh" data-institution="Teesside University, UK" data-type="leadership" data-date="2022" data-full-bio="Francisca Arboh is a lecturer and researcher at Teesside University, specializing in organizational behaviour, human resource management, leadership, and well-being. Her work explores how artificial intelligence and data-driven systems can enhance employee well-being and support sustainable, high-performing organizations. With international research and teaching experience across Africa, China, and the United Kingdom, she brings a global perspective to leadership development and digital transformation in modern workplaces." data-email="fisca@gmail.com" data-photo="img/collaborators/Francisca Arboh.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Francisca Arboh.jpg" alt="Dr. Francisca Arboh" class="collaborator-photo">
+                                <span class="collaborator-type-badge leadership">Leadership</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Francisca Arboh</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Teesside University, UK</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in organizational behaviour, HRM, leadership, employee well-being, and AI-driven digital workplace transformation.</p>
+
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="https://www.linkedin.com/in/francisca-arboh-487769119/" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="Website" onclick="event.stopPropagation()"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Leadership Collaborator 2 -->
+                        <article class="collaborator-card" data-name="Felix Gyawu Addo" data-institution="University of Ottawa, Canada" data-type="leadership" data-date="2022" data-full-bio="Felix Gyawu Addo is a researcher and environmental sustainability advocate with expertise in environmental biotechnology, microbial ecology, and wastewater surveillance. His work focuses on sustainable solutions in solid waste management, aquaculture biotechnology, and ecological restoration. With a strong background in leadership and entrepreneurship, he actively contributes to initiatives that promote environmental protection, policy engagement, and innovative approaches to managing ecological systems." data-email="fisca@gmail.com" data-photo="img/collaborators/Felix_Addo.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Felix_Addo.jpg" alt="Felix Gyawu Addo" class="collaborator-photo">
+                                <span class="collaborator-type-badge leadership">Leadership</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Felix Gyawu Addo</h3>
+                                <p class="collaborator-role">Researcher and CEO- Ecoamet Solutions</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>University of Ottawa, Canada</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in environmental biotechnology, microbial ecology, wastewater surveillance, waste management, aquaculture, and ecological restoration.</p>
+
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="https://scholar.google.com/citations?user=1OhiR8sAAAAJ&hl=en" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="https://www.linkedin.com/in/f-addo-gradghisep-87159694/" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="Website" onclick="event.stopPropagation()"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <!-- Leadership Collaborator 3 --
+
+                        <article class="collaborator-card" data-name="Dr. Francisca Arboh" data-institution="Teesside University, UK" data-type="leadership" data-date="2022" data-full-bio="xxxxx." data-email="fisca@gmail.com" data-photo="img/collaborators/Francisca Arboh.jpg">
+                            <div class="collaborator-photo-container">
+                                <img src="img/collaborators/Francisca Arboh.jpg" alt="Dr. Francisca Arboh" class="collaborator-photo">
+                                <span class="collaborator-type-badge leadership">Leadership</span>
+                            </div>
+                            <div class="collaborator-info">
+                                <h3 class="collaborator-name">Dr. Francisca Arboh</h3>
+                                <p class="collaborator-role">Lecturer and Researcher</p>
+                                <div class="collaborator-institution">
+                                    <i class="fas fa-university"></i>
+                                    <span>Teesside University, UK</span>
+                                </div>
+                                <p class="collaborator-bio">Specializes in organizational behaviour, HRM, leadership, employee well-being, and AI-driven digital workplace transformation.</p>
+
+                                <div class="collaborator-footer">
+                                    
+                                    <span class="collaborator-bio-preview">Click to read more <i class="fas fa-arrow-right"></i></span>
+                                    <div class="collaborator-links">
+                                        <a href="#" class="collaborator-link" aria-label="Google Scholar" onclick="event.stopPropagation()"><i class="fas fa-graduation-cap"></i></a>
+                                        <a href="https://www.linkedin.com/in/francisca-arboh-487769119/" class="collaborator-link" aria-label="LinkedIn" onclick="event.stopPropagation()"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="collaborator-link" aria-label="Website" onclick="event.stopPropagation()"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results hidden" id="noResults">
+                    <i class="fas fa-search"></i>
+                    <h3>No collaborators found</h3>
+                    <p>Try adjusting your search terms or filters</p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="footer-text">&copy; 2025 Dr. Collins Sey. All rights reserved. | Oxford Brookes College, Chengdu University of Technology</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="collaboratorModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-photo-container" id="modalPhotoContainer">
+                    <img src="" alt="" class="modal-photo" id="modalPhoto">
+                </div>
+                <div class="modal-header-info">
+                    <h2 class="modal-name" id="modalName"></h2>
+                    <p class="modal-role" id="modalRole"></p>
+                    <div class="modal-institution" id="modalInstitution">
+                        <i class="fas fa-university"></i>
+                        <span></span>
+                    </div>
+                    <span class="modal-type-badge" id="modalTypeBadge"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-user-circle"></i>
+                        Biography
+                    </h3>
+                    <p class="modal-bio" id="modalBio"></p>
+                </div>
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-address-card"></i>
+                        Contact Information
+                    </h3>
+                    <div class="modal-contact">
+                        <a href="#" class="modal-contact-item" id="modalEmail">
+                            <i class="fas fa-envelope"></i>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-external-link-alt"></i>
+                        Links
+                    </h3>
+                    <div class="modal-links">
+                        <a href="#" class="modal-link" id="modalGoogleScholar">
+                            <i class="fas fa-graduation-cap"></i>
+                            Google Scholar
+                        </a>
+                        <a href="#" class="modal-link" id="modalLinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                        <a href="#" class="modal-link" id="modalWebsite">
+                            <i class="fas fa-globe"></i>
+                            Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress Bar
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+
+        window.onscroll = updateProgressBar;
+
+        // Update Statistics
+        function updateStats() {
+            const research = document.querySelectorAll('.collaborator-card[data-type="research"]').length;
+            const project = document.querySelectorAll('.collaborator-card[data-type="project"]').length;
+            const leadership = document.querySelectorAll('.collaborator-card[data-type="leadership"]').length;
+            
+            // Count unique institutions
+            const institutions = new Set();
+            document.querySelectorAll('.collaborator-card').forEach(card => {
+                institutions.add(card.dataset.institution);
+            });
+
+            document.getElementById('totalResearch').textContent = research;
+            document.getElementById('totalProject').textContent = project;
+            document.getElementById('totalLeadership').textContent = leadership;
+            document.getElementById('totalInstitutions').textContent = institutions.size;
+
+            // Update category counts
+            document.getElementById('researchCount').textContent = research;
+            document.getElementById('projectCount').textContent = project;
+            document.getElementById('leadershipCount').textContent = leadership;
+        }
+
+        // Modal Functionality
+        const modal = document.getElementById('collaboratorModal');
+        const modalClose = document.getElementById('modalClose');
+        const collaboratorCards = document.querySelectorAll('.collaborator-card');
+
+        // Modal elements
+        const modalPhoto = document.getElementById('modalPhoto');
+        const modalPhotoContainer = document.getElementById('modalPhotoContainer');
+        const modalName = document.getElementById('modalName');
+        const modalRole = document.getElementById('modalRole');
+        const modalInstitution = document.getElementById('modalInstitution');
+        const modalTypeBadge = document.getElementById('modalTypeBadge');
+        const modalBio = document.getElementById('modalBio');
+        const modalEmail = document.getElementById('modalEmail');
+        const modalGoogleScholar = document.getElementById('modalGoogleScholar');
+        const modalLinkedIn = document.getElementById('modalLinkedIn');
+        const modalWebsite = document.getElementById('modalWebsite');
+
+        function openModal(card) {
+            const name = card.dataset.name;
+            const institution = card.dataset.institution;
+            const type = card.dataset.type;
+            const fullBio = card.dataset.fullBio;
+            const email = card.dataset.email;
+            const photo = card.dataset.photo;
+
+            // Set content
+            modalName.textContent = name;
+            modalRole.textContent = card.querySelector('.collaborator-role').textContent;
+            modalInstitution.querySelector('span').textContent = institution;
+            modalBio.textContent = fullBio;
+            
+            // Set email
+            modalEmail.href = `mailto:${email}`;
+            modalEmail.querySelector('span').textContent = email;
+
+            // Set photo
+            if (photo) {
+                modalPhoto.src = photo;
+                modalPhoto.style.display = 'block';
+                modalPhotoContainer.innerHTML = `<img src="${photo}" alt="${name}" class="modal-photo">`;
+            } else {
+                modalPhotoContainer.innerHTML = `
+                    <div class="modal-photo-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            }
+
+            // Set type badge
+            modalTypeBadge.className = `modal-type-badge ${type}`;
+            modalTypeBadge.textContent = type;
+
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Add click event to all collaborator cards
+        collaboratorCards.forEach(card => {
+            card.addEventListener('click', () => openModal(card));
+        });
+
+        // Close modal events
+        modalClose.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Search and Filter Functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const categorySections = document.querySelectorAll('.category-section');
+        const noResults = document.getElementById('noResults');
+        const sortSelect = document.getElementById('sortSelect');
+
+        function filterCollaborators() {
+            const query = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-chip.active').dataset.filter;
+
+            let visibleCount = 0;
+
+            collaboratorCards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                const institution = card.dataset.institution.toLowerCase();
+                const type = card.dataset.type;
+                const bio = card.querySelector('.collaborator-bio').textContent.toLowerCase();
+
+                const matchesSearch = name.includes(query) || institution.includes(query) || bio.includes(query);
+                const matchesFilter = activeFilter === 'all' || type === activeFilter;
+
+                if (matchesSearch && matchesFilter) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Hide empty category sections
+            categorySections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.collaborator-card:not(.hidden)');
+                if (visibleCards.length === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                    // Update count
+                    const countBadge = section.querySelector('.category-count');
+                    countBadge.textContent = visibleCards.length;
+                }
+            });
+
+            // Show no results message
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Sorting functionality
+        function sortCollaborators() {
+            const sortValue = sortSelect.value;
+            const grids = document.querySelectorAll('.collaborator-grid');
+
+            grids.forEach(grid => {
+                const cards = Array.from(grid.querySelectorAll('.collaborator-card'));
+                
+                cards.sort((a, b) => {
+                    const nameA = a.dataset.name.toLowerCase();
+                    const nameB = b.dataset.name.toLowerCase();
+                    const instA = a.dataset.institution.toLowerCase();
+                    const instB = b.dataset.institution.toLowerCase();
+                    const dateA = parseInt(a.dataset.date) || 0;
+                    const dateB = parseInt(b.dataset.date) || 0;
+
+                    switch(sortValue) {
+                        case 'name-asc':
+                            return nameA.localeCompare(nameB);
+                        case 'name-desc':
+                            return nameB.localeCompare(nameA);
+                        case 'institution':
+                            return instA.localeCompare(instB);
+                        case 'recent':
+                            return dateB - dateA;
+                        default:
+                            return 0;
+                    }
+                });
+
+                cards.forEach(card => grid.appendChild(card));
+            });
+        }
+
+        // Event listeners
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                filterCollaborators();
+            });
+        });
+
+        searchInput.addEventListener('input', filterCollaborators);
+        sortSelect.addEventListener('change', sortCollaborators);
+
+        // Sidebar Toggle
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 && 
+                !sidebar.contains(e.target) && 
+                !sidebarToggle.contains(e.target) && 
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Mobile Navigation
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavIcon = document.getElementById('mobileNavIcon');
+
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const isExpanded = mobileNav.classList.contains('active');
+            mobileNavToggle.setAttribute('aria-expanded', isExpanded);
+            
+            if (isExpanded) {
+                mobileNavIcon.classList.remove('fa-bars');
+                mobileNavIcon.classList.add('fa-times');
+            } else {
+                mobileNavIcon.classList.remove('fa-times');
+                mobileNavIcon.classList.add('fa-bars');
+            }
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                mobileNavToggle.setAttribute('aria-expanded', 'false');
+                mobileNavIcon.classList.remove('fa-times');
+                mobileNavIcon.classList.add('fa-bars');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.contains(e.target) && 
+                !mobileNavToggle.contains(e.target) && 
+                mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                mobileNavToggle.setAttribute('aria-expanded', 'false');
+                mobileNavIcon.classList.remove('fa-times');
+                mobileNavIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+                if (mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    mobileNavToggle.setAttribute('aria-expanded', 'false');
+                    mobileNavIcon.classList.remove('fa-times');
+                    mobileNavIcon.classList.add('fa-bars');
+                }
+            }
+        });
+
+        // Page Transition
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (!link.classList.contains('active')) {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    const transition = document.getElementById('pageTransition');
+                    
+                    transition.classList.add('active');
+                    
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                }
+            });
+        });
+
+        // Initialize
+        updateStats();
+    </script>
+</body>
+</html>
