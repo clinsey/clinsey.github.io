@@ -25,17 +25,16 @@
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --deg-undergrad: #3182ce;
+            --deg-undergrad-bg: #ebf8ff;
+            --deg-masters: #b7791f;
+            --deg-masters-bg: #fffbeb;
+            --deg-phd: #38a169;
+            --deg-phd-bg: #f0fff4;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -45,940 +44,248 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
 
         /* Progress Bar */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: transparent;
-            z-index: 1001;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
+        .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: transparent; z-index: 1001; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); width: 0%; transition: width 0.1s ease-out; }
 
         /* Layout */
-        .app-container {
-            display: flex;
-            min-height: 100vh;
-        }
+        .app-container { display: flex; min-height: 100vh; }
 
         /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 320px;
-            height: 100vh;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-            overflow-y: auto;
-            transition: var(--transition);
-        }
-
-        .sidebar-profile {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .profile-photo-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 1.5rem;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
+        .sidebar { position: fixed; left: 0; top: 0; width: 320px; height: 100vh; background: var(--bg-secondary); border-right: 1px solid var(--border); padding: 2rem; display: flex; flex-direction: column; z-index: 100; overflow-y: auto; transition: var(--transition); }
+        .sidebar-profile { text-align: center; margin-bottom: 2rem; }
+        .profile-photo-container { position: relative; width: 200px; height: 200px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; box-shadow: var(--shadow-lg); animation: pulse-glow 3s ease-in-out infinite; }
 
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 10px 30px rgba(30, 58, 95, 0.2); }
             50% { box-shadow: 0 15px 40px rgba(30, 58, 95, 0.35); }
         }
 
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
+        .profile-photo { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .profile-photo-container:hover .profile-photo { transform: scale(1.05); }
+        .sidebar-name { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.25rem; animation: fade-in-up 0.8s ease-out; font-family: 'Inter', sans-serif; }
+        .sidebar-title { font-size: 0.875rem; color: var(--accent); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; animation: fade-in-up 0.8s ease-out 0.1s both; }
+        .sidebar-title-sub { font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; animation: fade-in-up 0.8s ease-out 0.1s both; }
 
-        .profile-photo-container:hover .profile-photo {
-            transform: scale(1.05);
-        }
+        .research-focus { margin: 0.8rem 0; padding: 1.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 12px; color: white; animation: fade-in-up 0.8s ease-out 0.2s both; }
+        .research-focus h3 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; opacity: 0.9; font-family: 'Inter', sans-serif; }
+        .research-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .research-tag { background: rgba(255,255,255,0.15); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.65rem; backdrop-filter: blur(10px); transition: var(--transition); }
+        .research-tag:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
 
-        .sidebar-name {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-            animation: fade-in-up 0.8s ease-out;
-            font-family: 'Inter', sans-serif;
-        }
+        .sidebar-contact { margin-top: auto; padding-top: 1.18rem; border-top: 1px solid var(--border); animation: fade-in-up 0.8s ease-out 0.4s both; }
+        .sidebar-contact h4 { font-size: 0.975rem; color: var(--text-secondary); margin-bottom: 1rem; font-family: 'Inter', sans-serif; font-weight: 500; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.775rem; color: var(--text-secondary); transition: var(--transition); }
+        .contact-item:hover { color: var(--primary); transform: translateX(5px); }
+        .contact-item i { width: 20px; color: var(--accent); }
 
-        .sidebar-title {
-            font-size: 0.875rem;
-            color: var(--accent);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            animation: fade-in-up 0.8s ease-out 0.1s both;
-        }
-
-        .sidebar-title-sub {
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            animation: fade-in-up 0.8s ease-out 0.1s both;
-        }
-
-        .research-focus {
-            margin: 0.8rem 0;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 12px;
-            color: white;
-            animation: fade-in-up 0.8s ease-out 0.2s both;
-        }
-
-        .research-focus h3 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .research-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .research-tag {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .research-tag:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* Additional Expertise Section */
-        .additional-expertise {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            animation: fade-in-up 0.8s ease-out 0.25s both;
-        }
-
-        .additional-expertise h3 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-        }
-
-        .expertise-list {
-            list-style: none;
-        }
-
-        .expertise-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.775rem;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .expertise-item:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .expertise-item i {
-            color: var(--accent);
-            margin-top: 0.25rem;
-            font-size: 0.5rem;
-        }
-
-        .expertise-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Sidebar Social Links */
-        .sidebar-social {
-            margin: 1.5rem 0;
-            padding: 0.5rem;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            animation: fade-in-up 0.8s ease-out 0.35s both;
-        }
-
-        .sidebar-social h3 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-        }
-
-        .sidebar-social-links {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .sidebar-social-link {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.875rem;
-        }
-
-        .sidebar-social-link:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .sidebar-contact {
-            margin-top: auto;
-            padding-top: 1.18rem;
-            border-top: 1px solid var(--border);
-            animation: fade-in-up 0.8s ease-out 0.4s both;
-        }
-
-        .sidebar-contact h4 {
-            font-size: 0.975rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.775rem;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-
-        .contact-item:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .contact-item i {
-            width: 20px;
-            color: var(--accent);
-        }
-
-        /* Mobile Sidebar Toggle */
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 101;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .sidebar-toggle:hover {
-            background: var(--primary);
-            color: white;
-        }
+        /* Sidebar Toggle */
+        .sidebar-toggle { display: none; position: fixed; top: 1rem; left: 1rem; z-index: 101; background: var(--bg-secondary); border: 1px solid var(--border); padding: 0.75rem; border-radius: 8px; cursor: pointer; box-shadow: var(--shadow-md); transition: var(--transition); }
+        .sidebar-toggle:hover { background: var(--primary); color: white; }
 
         /* Main Content */
-        .main-content {
-            margin-left: 320px;
-            flex: 1;
-            min-height: 100vh;
-        }
+        .main-content { margin-left: 320px; flex: 1; min-height: 100vh; }
 
         /* Navigation */
-        .top-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            z-index: 99;
-            transition: var(--transition);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 0.5rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background: rgba(30, 58, 95, 0.05);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 20px;
-        }
+        .top-nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 0 2rem; z-index: 99; transition: var(--transition); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .nav-links { display: flex; list-style: none; gap: 0.5rem; }
+        .nav-link { text-decoration: none; color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; transition: var(--transition); position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--primary); background: rgba(30, 58, 95, 0.05); }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--accent); transition: var(--transition); }
+        .nav-link:hover::after, .nav-link.active::after { width: 20px; }
 
         /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-lg);
-            z-index: 98;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .mobile-nav.active {
-            max-height: 500px;
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-            padding: 1rem;
-        }
-
-        .mobile-nav-link {
-            display: block;
-            padding: 1rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: var(--transition);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
-            background: rgba(30, 58, 95, 0.05);
-            color: var(--primary);
-            padding-left: 1.5rem;
-        }
-
-        .mobile-nav-link i {
-            margin-right: 0.75rem;
-            width: 20px;
-            color: var(--accent);
-        }
+        .mobile-nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; padding: 0.5rem; z-index: 1000; transition: var(--transition); }
+        .mobile-nav { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); z-index: 98; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .mobile-nav.active { max-height: 500px; }
+        .mobile-nav-links { list-style: none; padding: 1rem; }
+        .mobile-nav-link { display: block; padding: 1rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; border-radius: 8px; transition: var(--transition); border-bottom: 1px solid var(--border); }
+        .mobile-nav-link:hover, .mobile-nav-link.active { background: rgba(30, 58, 95, 0.05); color: var(--primary); padding-left: 1.5rem; }
+        .mobile-nav-link i { margin-right: 0.75rem; width: 20px; color: var(--accent); }
 
         /* Page Content */
-        .page-section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fade-in-up 0.6s ease-out forwards;
-        }
+        .page-section { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; opacity: 0; transform: translateY(20px); animation: fade-in-up 0.6s ease-out forwards; }
 
-        @keyframes fade-in-up {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fade-in-up { to { opacity: 1; transform: translateY(0); } }
 
-        .section-header {
-            margin-bottom: 3rem;
-            position: relative;
-        }
+        .section-header { margin-bottom: 3rem; position: relative; }
+        .section-header::before { content: ''; position: absolute; left: -2rem; top: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%); border-radius: 2px; }
+        .section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 60px; height: 3px; background: var(--accent); animation: expand-width 1s ease-out 0.5s both; }
 
-        .section-header::before {
-            content: '';
+        @keyframes expand-width { from { width: 0; } to { width: 60px; } }
+
+        .section-subtitle { color: var(--text-muted); font-size: 1.125rem; font-weight: 300; }
+
+        /* ====== SEARCH BAR ====== */
+        .search-container { margin-bottom: 2rem; }
+        .search-box { position: relative; width: 100%; }
+        .search-box input { width: 100%; padding: 0.875rem 1rem 0.875rem 2.75rem; border: 1px solid var(--border); border-radius: 12px; font-size: 0.9375rem; font-family: 'Inter', sans-serif; transition: var(--transition); background: var(--bg-secondary); color: var(--text-primary); }
+        .search-box input::placeholder { color: var(--text-muted); }
+        .search-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.15); }
+        .search-box .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1rem; pointer-events: none; }
+        .search-box .search-clear { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: var(--bg-primary); border: 1px solid var(--border); color: var(--text-muted); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.7rem; transition: var(--transition); opacity: 0; pointer-events: none; }
+        .search-box .search-clear.visible { opacity: 1; pointer-events: all; }
+        .search-box .search-clear:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .search-results-count { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; padding-left: 0.25rem; font-style: italic; display: none; }
+        .search-results-count.visible { display: block; }
+
+        /* Cohort Tabs */
+        .cohort-tabs-container { margin-bottom: 2rem; }
+        .cohort-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--bg-secondary); padding: 0.75rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .cohort-tab { padding: 0.6rem 1.25rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; }
+        .cohort-tab:hover { background: rgba(30, 58, 95, 0.05); color: var(--primary); border-color: var(--primary-light); transform: translateY(-2px); }
+        .cohort-tab.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .cohort-tab .cohort-count-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: white; font-size: 0.65rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; margin-left: 0.4rem; vertical-align: middle; }
+        .cohort-tab.active .cohort-count-badge { background: var(--accent-light); color: var(--primary); }
+
+        .cohort-tab-content { display: none; animation: fade-in-up 0.4s ease-out; margin-bottom: 3rem; }
+        .cohort-tab-content.active { display: block; }
+        .cohort-tab-content.search-mode .cohort-panel-header { display: none; }
+
+        .cohort-panel-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
+        .cohort-panel-title { font-size: 1.5rem; color: var(--primary); font-weight: 700; /*font-family: 'Inter', sans-serif;*/ }
+        .cohort-panel-count { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; }
+
+        /* Lab Year Tabs */
+        .lab-tabs-container { margin-bottom: 1.5rem; }
+        .lab-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; background: var(--bg-secondary); padding: 0.75rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .lab-tab { padding: 0.6rem 1.25rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; }
+        .lab-tab:hover { background: rgba(30, 58, 95, 0.05); color: var(--primary); border-color: var(--primary-light); transform: translateY(-2px); }
+        .lab-tab.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: var(--shadow-md); }
+        .lab-tab .lab-count-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: white; font-size: 0.65rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; margin-left: 0.4rem; vertical-align: middle; }
+        .lab-tab.active .lab-count-badge { background: var(--accent-light); color: var(--primary); }
+
+        .lab-panel-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
+        .lab-panel-title { font-size: 1.5rem; color: var(--primary); font-weight: 700; /*font-family: 'Inter', sans-serif;*/ }
+        .lab-panel-count { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+        /* Student Grid */
+        .student-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 768px) { .student-grid { grid-template-columns: 1fr; } }
+
+        /* Student Card */
+        .student-card { background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: var(--transition); opacity: 0; transform: translateY(20px); animation: fade-in-up 0.5s ease-out forwards; display: flex; flex-direction: row; height: 155px; position: relative; }
+        .student-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-md); transform: translateX(5px); }
+        .student-card.hidden { display: none !important; }
+
+        .student-photo-container { width: 120px; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); }
+        .student-photo { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .student-card:hover .student-photo { transform: scale(1.05); }
+        .student-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; }
+
+        .student-status { position: absolute; top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; }
+        .student-status.completed { background: rgba(34, 197, 94, 0.9); color: white; }
+        .student-status.ongoing { background: rgba(212, 165, 116, 0.9); color: white; }
+
+        .student-info { padding: 0.85rem 1.25rem 0.85rem 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; position: relative; }
+        .student-name { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.2rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .student-project { font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 0.35rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-style: italic; }
+        .student-meta { display: flex; flex-direction: column; gap: 0.1rem; }
+        .student-email, .student-year { display: flex; align-items: center; gap: 0.5rem; font-size: 0.65rem; color: var(--text-muted); }
+        .student-email i, .student-year i { color: var(--accent); width: 14px; font-size: 0.75rem; }
+        .student-email a { color: var(--text-muted); text-decoration: none; transition: var(--transition); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .student-email a:hover { color: var(--primary); }
+
+        /* ====== DEGREE TAG ====== */
+        .degree-tag {
             position: absolute;
-            left: -2rem;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
-            border-radius: 2px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent);
-            animation: expand-width 1s ease-out 0.5s both;
-        }
-
-        @keyframes expand-width {
-            from { width: 0; }
-            to { width: 60px; }
-        }
-
-        .section-subtitle {
-            color: var(--text-muted);
-            font-size: 1.125rem;
-            font-weight: 300;
-        }
-
-        /* Search Controls */
-        .search-controls {
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.875rem;
-            transition: var(--transition);
-            background: var(--bg-primary);
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .search-filters {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-chip {
-            padding: 0.5rem 1rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-chip:hover,
-        .filter-chip.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Stats Section */
-        .team-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
+            bottom: 0.6rem;
+            right: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.6rem;
             font-weight: 700;
-            color: var(--primary);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        /* Cohort Section */
-        .cohort-section {
-            margin-bottom: 3rem;
-        }
-
-        .cohort-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .cohort-year {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .cohort-count {
-            background: var(--accent);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        /* Student Grid - 2 per row */
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Student Card - Horizontal Layout */
-        .student-card {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fade-in-up 0.5s ease-out forwards;
-            display: flex;
-            flex-direction: row;
-            height: 140px;
-        }
-
-        .student-card:hover {
-            border-color: var(--accent-light);
-            box-shadow: var(--shadow-md);
-            transform: translateX(5px);
-        }
-
-        .student-photo-container {
-            width: 120px;
-            height: 100%;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        }
-
-        .student-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .student-card:hover .student-photo {
-            transform: scale(1.05);
-        }
-
-        .student-photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-        }
-
-        .student-status {
-            position: absolute;
-            top: 0.5rem;
-            left: 0.5rem;
-            padding: 0.15rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.65rem;
-            font-weight: 600;
             text-transform: uppercase;
-        }
-
-        .student-status.completed {
-            background: rgba(34, 197, 94, 0.9);
-            color: white;
-        }
-
-        .student-status.ongoing {
-            background: rgba(212, 165, 116, 0.9);
-            color: white;
-        }
-
-        .student-info {
-            padding: 1rem 1.25rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 0;
-        }
-
-        .student-name {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .student-project {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.04em;
+            font-family: 'Inter', sans-serif;
             line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            font-style: italic;
+            z-index: 2;
         }
 
-        .student-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 0.15rem;
+        .degree-tag.undergraduate {
+            background: var(--deg-undergrad-bg);
+            color: var(--deg-undergrad);
+            border: 1px solid rgba(49, 130, 206, 0.2);
         }
 
-        .student-email,
-        .student-year {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.67rem;
-            color: var(--text-muted);
+        .degree-tag.masters {
+            background: var(--deg-masters-bg);
+            color: var(--deg-masters);
+            border: 1px solid rgba(183, 121, 31, 0.2);
         }
 
-        .student-email i,
-        .student-year i {
-            color: var(--accent);
-            width: 14px;
-            font-size: 0.8rem;
+        .degree-tag.phd {
+            background: var(--deg-phd-bg);
+            color: var(--deg-phd);
+            border: 1px solid rgba(56, 161, 105, 0.2);
         }
 
-        .student-email a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: var(--transition);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        /* View Poster Button */
+        .view-poster-btn { position: absolute; top: 0.75rem; right: 0.75rem; background: var(--primary); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition); font-size: 0.72rem; box-shadow: var(--shadow-sm); z-index: 2; }
+        .view-poster-btn:hover { background: var(--accent); transform: scale(1.1); box-shadow: var(--shadow-md); }
 
-        .student-email a:hover {
-            color: var(--primary);
-        }
+        /* Modal */
+        .poster-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(8px); }
+        .poster-modal.active { display: flex; }
+        .poster-modal-content { position: relative; max-width: 90vw; max-height: 90vh; background: var(--bg-secondary); border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: modal-in 0.3s ease-out; }
 
-        /* Lab Members Section */
-        .lab-section {
-            margin-bottom: 3rem;
-        }
+        @keyframes modal-in { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
 
-        .lab-intro {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, #f0f4f8 100%);
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-        }
+        .poster-modal-image { max-width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+        .poster-modal-close { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.25rem; transition: var(--transition); backdrop-filter: blur(10px); z-index: 10; }
+        .poster-modal-close:hover { background: var(--accent); transform: rotate(90deg); }
+        .poster-modal-caption { padding: 1.25rem 2rem; text-align: center; background: var(--bg-secondary); border-top: 1px solid var(--border); }
+        .poster-modal-caption h4 { color: var(--primary); font-size: 1.1rem; margin-bottom: 0.35rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+        .poster-modal-caption p { color: var(--text-secondary); font-size: 0.8rem; font-style: italic; }
 
-        .lab-intro-text {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 800px;
-        }
+        /* Lab Members */
+        .lab-section { margin-bottom: 3rem; }
 
         /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-            grid-column: 1 / -1;
-        }
-
-        .no-results i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--border);
-        }
-
-        .no-results h3 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
+        .no-results { text-align: center; padding: 4rem 2rem; color: var(--text-muted); grid-column: 1 / -1; }
+        .no-results i { font-size: 3rem; margin-bottom: 1rem; color: var(--border); }
+        .no-results h3 { color: var(--text-primary); margin-bottom: 0.5rem; }
 
         /* Footer */
-        .footer {
-            background: var(--primary);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .footer-text {
-            opacity: 0.8;
-            font-size: 0.875rem;
-        }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer-content { max-width: 1000px; margin: 0 auto; }
+        .footer-text { opacity: 0.8; font-size: 0.875rem; }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .sidebar-toggle {
-                display: block;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .team-stats {
-                grid-template-columns: 1fr;
-            }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .sidebar-toggle { display: block; }
+            .main-content { margin-left: 0; }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .mobile-nav {
-                display: block;
-            }
-
-            .section-title {
-                font-size: 1.75rem;
-            }
-
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .student-card {
-                height: auto;
-                min-height: 120px;
-            }
-
-            .student-photo-container {
-                width: 100px;
-            }
-
-            .cohort-header {
-                flex-wrap: wrap;
-            }
+            .nav-links { display: none; }
+            .mobile-nav-toggle { display: block; }
+            .mobile-nav { display: block; }
+            .section-title { font-size: 1.75rem; }
+            .student-grid { grid-template-columns: 1fr; }
+            .student-card { height: auto; min-height: 135px; }
+            .student-photo-container { width: 100px; }
+            .cohort-tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .cohort-tabs::-webkit-scrollbar { display: none; }
+            .cohort-tab { white-space: nowrap; flex-shrink: 0; }
+            .poster-modal-content { max-width: 95vw; max-height: 90vh; }
+            .poster-modal { padding: 1rem; }
+            .degree-tag { font-size: 0.55rem; padding: 0.15rem 0.45rem; }
         }
 
-        /* Page Transition */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            z-index: 10000;
-            transform: translateY(100%);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-        }
+        .hidden { display: none !important; }
 
-        .page-transition.active {
-            transform: translateY(0);
-        }
-
-        /* Focus styles */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        /* Hidden class for filtering */
-        .hidden {
-            display: none !important;
-        }
+        .search-empty-state { text-align: center; padding: 3rem 2rem; color: var(--text-muted); grid-column: 1 / -1; display: none; }
+        .search-empty-state.visible { display: block; }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Progress Bar -->
@@ -986,10 +293,8 @@
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Page Transition Overlay -->
     <div class="page-transition" id="pageTransition"></div>
 
-    <!-- Mobile Sidebar Toggle -->
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
         <i class="fas fa-user"></i>
     </button>
@@ -999,37 +304,12 @@
         <aside class="sidebar" id="sidebar" role="complementary" aria-label="Profile sidebar">
             <div class="sidebar-profile">
                 <div class="profile-photo-container">
-                    <img src="img/Collins Sey_CL.jpg" 
-                         alt="Dr. Collins Sey - Profile Photo" 
-                         class="profile-photo">
+                    <img src="img/Collins Sey_CL.jpg" alt="Dr. Collins Sey" class="profile-photo">
                 </div>
                 <h2 class="sidebar-name">Dr. Collins Sey</h2>
                 <p class="sidebar-title">Lecturer & Researcher</p>
                 <p class="sidebar-title-sub">Oxford Brookes College</p>
             </div>
-            
-            <!-- Sidebar Social Links -->
-            <div class="sidebar-social">
-                <h3>Connect</h3>
-                <div class="sidebar-social-links">
-                    <a href="https://scholar.google.com/citations?user=-U8jzsAAAAAJ&hl=en" class="sidebar-social-link" aria-label="Google Scholar" target="_blank">
-                        <i class="fas fa-graduation-cap"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/collins-sey-a9304982" class="sidebar-social-link" aria-label="LinkedIn" target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://www.researchgate.net/profile/Collins-Sey?ev=hdr_xprf" class="sidebar-social-link" aria-label="ResearchGate" target="_blank">
-                        <i class="fas fa-book"></i>
-                    </a>
-                    <a href="https://clinsey.github.io/" class="sidebar-social-link" aria-label="GitHub" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:collins.sey@zy.cdut.edu.cn" class="sidebar-social-link" aria-label="Email" target="_blank">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-
             <div class="research-focus">
                 <h3>Research Focus</h3>
                 <div class="research-tags">
@@ -1044,48 +324,11 @@
                     <span class="research-tag">Deep Learning</span>
                 </div>
             </div>
-
-            <!-- Additional Expertise Section -->
-            <div class="additional-expertise">
-                <h3>Additional Skills</h3>
-                <ul class="expertise-list">
-                    <li class="expertise-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Research Methods</span>
-                    </li>
-                    <li class="expertise-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Student Mentorship and Academic Guidance</span>
-                    </li>
-                    <li class="expertise-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Curriculum Development</span>
-                    </li>
-                    <li class="expertise-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Training and Professional Development</span>
-                    </li>
-                    <li class="expertise-item">
-                        <i class="fas fa-circle"></i>
-                        <span>Project Coordination</span>
-                    </li>
-                </ul>
-            </div>
-
             <div class="sidebar-contact">
                 <h4>Contact Information</h4>
-                <div class="contact-item">
-                    <i class="fas fa-university"></i>
-                    <span>Chengdu University of Technology</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-building"></i>
-                    <span>Dept. of Computer Sci & Software Eng</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Building 8, Room 8204</span>
-                </div>
+                <div class="contact-item"><i class="fas fa-university"></i><span>Chengdu University of Technology</span></div>
+                <div class="contact-item"><i class="fas fa-building"></i><span>Dept. of Computer Sci & Software Eng</span></div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Building 8, Room 8204</span></div>
             </div>
         </aside>
 
@@ -1094,12 +337,7 @@
             <!-- Top Navigation -->
             <nav class="top-nav" role="navigation" aria-label="Main navigation">
                 <div class="nav-container">
-                    <a href="index.html" class="nav-logo">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>CS</span>
-                    </a>
-                    
-                    <!-- Desktop Navigation -->
+                    <a href="index.html" class="nav-logo"><i class="fas fa-graduation-cap"></i><span>CS</span></a>
                     <ul class="nav-links" role="menubar">
                         <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
                         <li role="none"><a href="publications.html" class="nav-link" role="menuitem">Publications</a></li>
@@ -1108,17 +346,14 @@
                         <li role="none"><a href="collaborators.html" class="nav-link" role="menuitem">Collaborators</a></li>
                         <li role="none"><a href="projects.html" class="nav-link" role="menuitem">Projects</a></li>
                         <li role="none"><a href="gallery.html" class="nav-link" role="menuitem">Gallery</a></li>
-                        <!--<li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>-->
                     </ul>
-
-                    <!-- Mobile Navigation Toggle -->
                     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle mobile navigation" aria-expanded="false">
                         <i class="fas fa-bars" id="mobileNavIcon"></i>
                     </button>
                 </div>
             </nav>
 
-            <!-- Mobile Navigation Menu -->
+            <!-- Mobile Navigation -->
             <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
                 <ul class="mobile-nav-links">
                     <li><a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a></li>
@@ -1128,7 +363,6 @@
                     <li><a href="collaborators.html" class="mobile-nav-link"><i class="fas fa-handshake"></i> Collaborators</a></li>
                     <li><a href="projects.html" class="mobile-nav-link"><i class="fas fa-project-diagram"></i> Projects</a></li>
                     <li><a href="gallery.html" class="mobile-nav-link"><i class="fas fa-images"></i> Gallery</a></li>
-                    <!--<li><a href="contact.html" class="mobile-nav-link"><i class="fas fa-envelope"></i> Contact</a></li>-->
                 </ul>
             </nav>
 
@@ -1139,47 +373,6 @@
                     <p class="section-subtitle">Graduate students and research assistants</p>
                 </div>
 
-                <!-- Search Controls -->
-                <div class="search-controls">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search by student name or project title...">
-                    </div>
-                    <div class="search-filters">
-                        <span class="filter-chip active" data-filter="all">All Students</span>
-                        <span class="filter-chip" data-filter="supervised">Supervised Students</span>
-                        <span class="filter-chip" data-filter="lab">Lab Members</span>
-                        <span class="filter-chip" data-filter="2025">2025 Cohort</span>
-                        <span class="filter-chip" data-filter="2024">2024 Cohort</span>
-                        <span class="filter-chip" data-filter="2023">2023 Cohort</span>
-                    </div>
-                </div>
-
-                <!-- Stats -->
-                <!--<div class="team-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <span class="stat-number" id="totalSupervised">0</span>
-                        <span class="stat-label">Supervised Students</span>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <span class="stat-number" id="totalLab">0</span>
-                        <span class="stat-label">Lab Members</span>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <span class="stat-number" id="totalCompleted">0</span>
-                        <span class="stat-label">Completed Theses</span>
-                    </div>
-                </div>-->
-
                 <!-- Supervised Students Section -->
                 <div class="supervised-section" id="supervisedSection">
                     <div class="section-header">
@@ -1187,504 +380,569 @@
                         <p class="section-subtitle">Students under my supervision</p>
                     </div>
 
-                    <!-- 2025 Cohort -->
-                    <div class="cohort-section" data-cohort="2025" data-type="supervised">
-                        <div class="cohort-header">
-                            <h3 class="cohort-year">2025 Cohort</h3>
-                            <span class="cohort-count">13 students</span>
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" id="searchInput" placeholder="Search by student name, project title, or degree..." autocomplete="off">
+                            <button class="search-clear" id="searchClear" aria-label="Clear search"><i class="fas fa-times"></i></button>
                         </div>
-                        <div class="student-grid">
-                            <article class="student-card" data-name="Fionna" data-project="Blockchain-Based Supply Chain Management" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Fionna.jpg" alt="Fionna" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
+                        <div class="search-results-count" id="searchResultsCount"></div>
+                    </div>
+
+                    <!-- Cohort Tabs -->
+                    <div class="cohort-tabs-container" id="cohortTabsContainer">
+                        <div class="cohort-tabs" id="cohortTabs"></div>
+                    </div>
+
+                    <!-- Cohort Contents -->
+                    <div id="cohortTabContents">
+                        
+                        <!-- 2027 Cohort -->
+                         <!--
+                        <div class="cohort-tab-content" data-cohort="2027" data-type="supervised">
+                            <div class="cohort-panel-header">
+                                <h3 class="cohort-panel-title">2027 Cohort</h3>
+                                <span class="cohort-panel-count" data-cohort-count="2027">0 students</span>
+                            </div>
+                            <div class="student-grid">
+                                <div class="no-results" style="grid-column: 1 / -1;">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h3>No students yet</h3>
+                                    <p>Student data for the 2027 cohort will be added here.</p>
                                 </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">ZHÈNG Yùfēi (Fionna)</h4>
-                                    <p class="student-project">"Real-Time Detection and Mitigation of DDoS Attacks Based on Network Traffic Behavior Analysis"</p>
-                                    <div class="student-meta">
-                                        <!--<span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:zheng.yufei@student.zy.cdut.edu.cn">zheng.yufei@student.zy.cdut.edu.cn</a>
-                                        </span>-->
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <div class="search-empty-state" id="searchEmpty2027">
+                                    <i class="fas fa-search"></i>
+                                    <h3>No matching students</h3>
+                                    <p>Try a different search term.</p>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+
+
+                        <!-- 2026 Cohort -->
+                         <!---->
+                        <div class="cohort-tab-content" data-cohort="2026" data-type="supervised">
+                            <div class="cohort-panel-header">
+                                <h3 class="cohort-panel-title">2026 Cohort</h3>
+                                <span class="cohort-panel-count" data-cohort-count="2026">9 students</span>
+                            </div>
+                            <div class="student-grid">
+                                <article class="student-card" data-name="LÓNG Hàoyǔ (Kalon)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/Kalon.jpg" alt="Kalon" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="HUÒ Guǎnglóngyǔ (Tommy)" data-project="AI-Powered Intrusion Detection" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <img src="img/research_team/cohort 2025/Tommy.jpg" alt="HUÒ Guǎnglóngyǔ (Tommy)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">HUÒ Guǎnglóngyǔ (Tommy)</h4>
-                                    <p class="student-project">"Research and Development of an Intelligent Medical Diagnostic System Using Image Segmentation and LLMs"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:huo.guanglongyu@student.zy.cdut.edu.cn">huo.guanglongyu@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LÓNG Hàoyǔ (Kalon)</h4>
+                                        <p class="student-project">"MSc Data Science and Artificial Intelligence"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:long.haoyu@student.zy.cdut.edu.cn">long.haoyu@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <!--<span class="degree-tag phd">PhD</span>
+                                        <span class="degree-tag masters">MSc</span>
+                                        <span class="degree-tag undergraduate">BSc</span>-->
+                                        <span class="degree-tag masters">MSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="LÓNG Hàoyǔ (Kalon)"><i class="fas fa-image"></i></button>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
 
-                            <article class="student-card" data-name="YUÁN Hàolán (Henry)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>--->
-                                    <img src="img/research_team/cohort 2025/henry.jpg" alt="YUÁN Hàolán (Henry)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">YUÁN Hàolán (Henry)</h4>
-                                    <p class="student-project">"Student Emotional Health Monitoring Using Text-Based Interaction Analysis"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:yuan.haolan@student.zy.cdut.edu.cn">yuan.haolan@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="CHÉN Ruìhán (Eric)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/Eric.jpg" alt="Eric" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="LIÚ Qíchēn (Aaron)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Aaron.jpg" alt="LIÚ Qíchēn (Aaron)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LIÚ Qíchēn (Aaron)</h4>
-                                    <p class="student-project">"Real-Time Vision-Based Smart Parking and EV Slot Monitoring for Efficient Campus Mobility"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:liu.qichen@student.zy.cdut.edu.cn">liu.qichen@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                    <div class="student-info">
+                                        <h4 class="student-name">CHÉN Ruìhán (Eric)</h4>
+                                        <p class="student-project">"MSc Data Science and Artificial Intelligence"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:chenruihan@student.zy.cdut.edu.cn">chenruihan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <!--<span class="degree-tag phd">PhD</span>
+                                        <span class="degree-tag masters">MSc</span>
+                                        <span class="degree-tag undergraduate">BSc</span>-->
+                                        <span class="degree-tag masters">MSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="陈睿涵 CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
 
-
-                            <article class="student-card" data-name="LUŌ Xǔyuè (Charlotte)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Charlotte.jpg" alt="LUŌ Xǔyuè (Charlotte)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LUŌ Xǔyuè (Charlotte)</h4>
-                                    <p class="student-project">"Hybrid Learning Framework for Anomaly Detection in IoT Networks"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:luo.xuyue@student.zy.cdut.edu.cn">luo.xuyue@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="ZHĀNG Měilíng (Mandy)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/Mandy.jpg" alt="Mandy" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
-
-
-                            <article class="student-card" data-name="WÁNG Hǎijié (Leo)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Leo.jpg" alt="WÁNG Hǎijié (Leo)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">WÁNG Hǎijié (Leo)</h4>
-                                    <p class="student-project">"Vision-Based Surface Defect Localization and Anomaly Detection with Spatiotemporal Attention"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:wang.haijie@student.zy.cdut.edu.cn">wang.haijie@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                    <div class="student-info">
+                                        <h4 class="student-name">ZHĀNG Měilíng (Mandy)</h4>
+                                        <p class="student-project">"MSc Data Science and Artificial Intelligence"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:zhangmeiling@student.zy.cdut.edu.cn">zhangmeiling@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <!--<span class="degree-tag phd">PhD</span>
+                                        <span class="degree-tag masters">MSc</span>
+                                        <span class="degree-tag undergraduate">BSc</span>-->
+                                        <span class="degree-tag masters">MSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
                                     </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="ZHĀNG Shūháng (Dylan)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Dylan.jpg" alt="ZHĀNG Shūháng (Dylan)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">ZHĀNG Shūháng (Dylan)</h4>
-                                    <p class="student-project">"Deep Learning-Enabled Intrusion Detection System for IoT Networks"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:zhang.shuhang@student.zy.cdut.edu.cn">zhang.shuhang@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                </article>
+                                <!--###########################################-->
+                                <article class="student-card" data-name="HÚ Hǎo (Leo)" data-project="Lightweight Deep Learning with Attention Mechanism for Automated Crop Disease Recognition" data-type="supervised" data-cohort="2026" data-degree="undergraduate" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Leo" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="LI Xīntóng (Jane)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Jane.jpg" alt="LI Xīntóng (Jane)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LI Xīntóng (Jane)</h4>
-                                    <p class="student-project">"Automated Multi-Facial Recognition with Timestamp Aggregation for Accurate Student Attendance Monitoring"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:li.xintong1@student.zy.cdut.edu.cn">li.xintong1@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                    <div class="student-info">
+                                        <h4 class="student-name">HÚ Hǎo (Leo)</h4>
+                                        <p class="student-project">"Lightweight Deep Learning with Attention Mechanism for Automated Crop Disease Recognition"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:hu.hao@student.zy.cdut.edu.cn">hu.hao@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
 
-                            <article class="student-card" data-name="LÓNG Hàoyǔ (Kalon)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Kalon.jpg" alt="LÓNG Hàoyǔ (Kalon)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LÓNG Hàoyǔ (Kalon)</h4>
-                                    <p class="student-project">"Machine Vision Model for Age-Demographic Classification in Urban Surveillance Environments"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:long.haoyu@student.zy.cdut.edu.cn">long.haoyu@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="MǍ Chàng (Marvin)" data-project="Explainable Deep Learning-Based Intrusion Detection for IoT Network Security" data-type="supervised" data-cohort="2026" data-degree="undergraduate" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Marvin" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
+                                    <div class="student-info">
+                                        <h4 class="student-name">MǍ Chàng (Marvin)</h4>
+                                        <p class="student-project">"Explainable Deep Learning-Based Intrusion Detection for IoT Network Security"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:ma.chang@student.zy.cdut.edu.cn">ma.chang@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="MǍ Chàng (Marvin)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
 
-                            <article class="student-card" data-name="LIÚ Hǎiyì (Trent)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Trent.jpg" alt="LIÚ Hǎiyì (Trent)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LIÚ Hǎiyì (Trent)</h4>
-                                    <p class="student-project">"Secure and Privacy-Preserving Data Sharing Scheme for IoT Networks"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:liu.haiyi@student.zy.cdut.edu.cn">liu.haiyi@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="SÒNG Sīruì (Olivia)" data-project="Attention Enhanced Deep Learning for Surface Defect Detection and Localization" data-type="supervised" data-cohort="2026" data-degree="undergraduate" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Olivia" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
+                                    <div class="student-info">
+                                        <h4 class="student-name">SÒNG Sīruì (Olivia)</h4>
+                                        <p class="student-project">"Attention Enhanced Deep Learning for Surface Defect Detection and Localization"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:song.sirui@student.zy.cdut.edu.cn">song.sirui@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="SÒNG Sīruì (Olivia)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
 
-                            <article class="student-card" data-name="LI Chúnfēng (Oliver)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Oliver.jpg" alt="LI Chúnfēng (Oliver)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">LI Chúnfēng (Oliver)</h4>
-                                    <p class="student-project">"Automated Student Mental Health Monitoring Using Facial Recognition and Expression Analytics for Enhanced Academic Support and Perfomance"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:liu.haiyi@student.zy.cdut.edu.cn">li.chunfeng1@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                                                <article class="student-card" data-name="WÚ Yǔjié (Jay)" data-project="Explainable Deep Learning for Medical Image Segmentation and Disease Classification" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Jay" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
+                                    <div class="student-info">
+                                        <h4 class="student-name">WÚ Yǔjié (Jay)</h4>
+                                        <p class="student-project">"Explainable Deep Learning for Medical Image Segmentation and Disease Classification"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:wu.yujie@student.zy.cdut.edu.cn">wu.yujie@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="WÚ Yǔjié (Jay)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
 
-                            <article class="student-card" data-name="ZHĀNG Yíngxiāo (Daniel)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>-->
-                                    <img src="img/research_team/cohort 2025/Daniel.jpg" alt="ZHĀNG Yíngxiāo (Daniel)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">ZHĀNG Yíngxiāo (Daniel)</h4>
-                                    <p class="student-project">"Next-Generation Secure Passwordless Web Authentication Using Face Recognition with Anti-Spoofing"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:liu.haiyi@student.zy.cdut.edu.cn">zhang.yingxiao@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="DĪNG Aòxuān (Geoff)" data-project="Explainable and Adaptive Machine Learning for Phishing Detection" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Geoff" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
+                                    <div class="student-info">
+                                        <h4 class="student-name">DĪNG Aòxuān (Geoff)</h4>
+                                        <p class="student-project">"Explainable and Adaptive Machine Learning for Phishing Detection"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:ding.aoxuan@student.zy.cdut.edu.cn">ding.aoxuan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="DĪNG Aòxuān (Geoff)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
 
-                            <!--
-                            
-                            <article class="student-card" data-name="YUÁN Hàolán (Henry)" data-project="Smart City Traffic Optimization" data-type="supervised" data-cohort="2025">
-                                <div class="student-photo-container">
-                                    <!--<div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>--
-                                    <img src="img/research_team/cohort 2025/henry2.jpg" alt="YUÁN Hàolán (Henry)" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">YUÁN Hàolán (Henry)</h4>
-                                    <p class="student-project">"Student Emotional Health Monitoring Using Text-Based Interaction Analysis"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:yuan.haolan@student.zy.cdut.edu.cn">yuan.haolan@student.zy.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2025
-                                        </span>
+                                <article class="student-card" data-name="ZHĀNG Zhìhéng (Brandon)" data-project="Computer Vision Based Student Engagement Analysis Using Facial Expression Recognition" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Brandon" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
                                     </div>
-                                </div>
-                            </article>
+                                    <div class="student-info">
+                                        <h4 class="student-name">ZHĀNG Zhìhéng (Brandon)</h4>
+                                        <p class="student-project">"Computer Vision Based Student Engagement Analysis Using Facial Expression Recognition"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:zhang.zhiheng@student.zy.cdut.edu.cn">zhang.zhiheng@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="ZHĀNG Zhìhéng (Brandon)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+                                <!--
+                                <article class="student-card" data-name="CHÉN Ruìhán (Eric)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Eric" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">陈睿涵 CHÉN Ruìhán (Eric)</h4>
+                                        <p class="student-project">"Explainable Deep Learning for Medical Image Segmentation and Disease Classification"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:chenruihan@student.zy.cdut.edu.cn">chenruihan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="CHÉN Ruìhán (Eric)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Eric" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">陈睿涵 CHÉN Ruìhán (Eric)</h4>
+                                        <p class="student-project">"Explainable Deep Learning for Medical Image Segmentation and Disease Classification"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:chenruihan@student.zy.cdut.edu.cn">chenruihan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="CHÉN Ruìhán (Eric)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Eric" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">陈睿涵 CHÉN Ruìhán (Eric)</h4>
+                                        <p class="student-project">"Explainable Deep Learning for Medical Image Segmentation and Disease Classification"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:chenruihan@student.zy.cdut.edu.cn">chenruihan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="CHÉN Ruìhán (Eric)" data-project="MSc Data Science and Artificial Intelligence" data-type="supervised" data-cohort="2026" data-degree="masters" data-poster="">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2026/user.jpg" alt="Eric" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">陈睿涵 CHÉN Ruìhán (Eric)</h4>
+                                        <p class="student-project">"Explainable Deep Learning for Medical Image Segmentation and Disease Classification"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:chenruihan@student.zy.cdut.edu.cn">chenruihan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2026</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="" data-student="CHÉN Ruìhán (Eric)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
                             -->
 
 
 
+                                <div class="search-empty-state" id="searchEmpty2026">
+                                    <i class="fas fa-search"></i>
+                                    <h3>No matching students</h3>
+                                    <p>Try a different search term.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################################################-->
+                        <!--#########################################################################################################################-->
+
+
+                        
+                        <!-- 2025 Cohort -->
+                        <div class="cohort-tab-content" data-cohort="2025" data-type="supervised">
+                            <div class="cohort-panel-header">
+                                <h3 class="cohort-panel-title">2025 Cohort</h3>
+                                <span class="cohort-panel-count" data-cohort-count="2025">12 students</span>
+                            </div>
+                            <div class="student-grid">
+                                <article class="student-card" data-name="ZHÈNG Yùfēi (Fionna)" data-project="Real-Time Detection and Mitigation of DDoS Attacks Based on Network Traffic Behavior Analysis" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/cohort 2025/Fionna_poster.png">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Fionna.jpg" alt="Fionna" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">ZHÈNG Yùfēi (Fionna)</h4>
+                                        <p class="student-project">"Real-Time Detection and Mitigation of DDoS Attacks Based on Network Traffic Behavior Analysis"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:zheng.yufei@student.zy.cdut.edu.cn">zheng.yufei@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <!--<span class="degree-tag phd">PhD</span>
+                                        <span class="degree-tag masters">MSc</span>
+                                        <span class="degree-tag undergraduate">BSc</span>-->
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/Fionna_poster.png" data-student="ZHÈNG Yùfēi (Fionna)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="HUÒ Guǎnglóngyǔ (Tommy)" data-project="Research and Development of an Intelligent Medical Diagnostic System Using Image Segmentation and LLMs" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/tommy.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Tommy.jpg" alt="Tommy" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">HUÒ Guǎnglóngyǔ (Tommy)</h4>
+                                        <p class="student-project">"Research and Development of an Intelligent Medical Diagnostic System Using Image Segmentation and LLMs"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:huo.guanglongyu@student.zy.cdut.edu.cn">huo.guanglongyu@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/tommy.jpg" data-student="HUÒ Guǎnglóngyǔ (Tommy)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="YUÁN Hàolán (Henry)" data-project="Student Emotional Health Monitoring Using Text-Based Interaction Analysis" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/henry.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/henry.jpg" alt="Henry" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">YUÁN Hàolán (Henry)</h4>
+                                        <p class="student-project">"Student Emotional Health Monitoring Using Text-Based Interaction Analysis"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:yuan.haolan@student.zy.cdut.edu.cn">yuan.haolan@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/henry.jpg" data-student="YUÁN Hàolán (Henry)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LIÚ Qíchēn (Aaron)" data-project="Real-Time Vision-Based Smart Parking and EV Slot Monitoring for Efficient Campus Mobility" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/aaron.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Aaron.jpg" alt="Aaron" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LIÚ Qíchēn (Aaron)</h4>
+                                        <p class="student-project">"Real-Time Vision-Based Smart Parking and EV Slot Monitoring for Efficient Campus Mobility"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:liu.qichen@student.zy.cdut.edu.cn">liu.qichen@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/aaron.jpg" data-student="LIÚ Qíchēn (Aaron)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LUŌ Xǔyuè (Charlotte)" data-project="Hybrid Learning Framework for Anomaly Detection in IoT Networks" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/charlotte.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Charlotte.jpg" alt="Charlotte" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LUŌ Xǔyuè (Charlotte)</h4>
+                                        <p class="student-project">"Hybrid Learning Framework for Anomaly Detection in IoT Networks"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:luo.xuyue@student.zy.cdut.edu.cn">luo.xuyue@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/charlotte.jpg" data-student="LUŌ Xǔyuè (Charlotte)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="WÁNG Hǎijié (Leo)" data-project="Vision-Based Surface Defect Localization and Anomaly Detection with Spatiotemporal Attention" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/leo.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Leo.jpg" alt="Leo" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">WÁNG Hǎijié (Leo)</h4>
+                                        <p class="student-project">"Vision-Based Surface Defect Localization and Anomaly Detection with Spatiotemporal Attention"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:wang.haijie@student.zy.cdut.edu.cn">wang.haijie@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/leo.jpg" data-student="WÁNG Hǎijié (Leo)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="ZHĀNG Shūháng (Dylan)" data-project="Deep Learning-Enabled Intrusion Detection System for IoT Networks" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/dylan.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Dylan.jpg" alt="Dylan" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">ZHĀNG Shūháng (Dylan)</h4>
+                                        <p class="student-project">"Deep Learning-Enabled Intrusion Detection System for IoT Networks"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:zhang.shuhang@student.zy.cdut.edu.cn">zhang.shuhang@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/dylan.jpg" data-student="ZHĀNG Shūháng (Dylan)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LI Xīntóng (Jane)" data-project="Automated Multi-Facial Recognition with Timestamp Aggregation for Accurate Student Attendance Monitoring" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/jane.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Jane.jpg" alt="Jane" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LI Xīntóng (Jane)</h4>
+                                        <p class="student-project">"Automated Multi-Facial Recognition with Timestamp Aggregation for Accurate Student Attendance Monitoring"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:li.xintong1@student.zy.cdut.edu.cn">li.xintong1@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/jane.jpg" data-student="LI Xīntóng (Jane)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LÓNG Hàoyǔ (Kalon)" data-project="Machine Vision Model for Age-Demographic Classification in Urban Surveillance Environments" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/kalon.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Kalon.jpg" alt="Kalon" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LÓNG Hàoyǔ (Kalon)</h4>
+                                        <p class="student-project">"Machine Vision Model for Age-Demographic Classification in Urban Surveillance Environments"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:long.haoyu@student.zy.cdut.edu.cn">long.haoyu@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/kalon.jpg" data-student="LÓNG Hàoyǔ (Kalon)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LIÚ Hǎiyì (Trent)" data-project="Secure and Privacy-Preserving Data Sharing Scheme for IoT Networks" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/trent.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Trent.jpg" alt="Trent" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LIÚ Hǎiyì (Trent)</h4>
+                                        <p class="student-project">"Secure and Privacy-Preserving Data Sharing Scheme for IoT Networks"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:liu.haiyi@student.zy.cdut.edu.cn">liu.haiyi@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/trent.jpg" data-student="LIÚ Hǎiyì (Trent)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="LI Chúnfēng (Oliver)" data-project="Automated Student Mental Health Monitoring Using Facial Recognition and Expression Analytics for Enhanced Academic Support and Perfomance" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/oliver.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Oliver.jpg" alt="Oliver" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">LI Chúnfēng (Oliver)</h4>
+                                        <p class="student-project">"Automated Student Mental Health Monitoring Using Facial Recognition and Expression Analytics for Enhanced Academic Support and Perfomance"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:li.chunfeng1@student.zy.cdut.edu.cn">li.chunfeng1@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/oliver.jpg" data-student="LI Chúnfēng (Oliver)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <article class="student-card" data-name="ZHĀNG Yíngxiāo (Daniel)" data-project="Next-Generation Secure Passwordless Web Authentication Using Face Recognition with Anti-Spoofing" data-type="supervised" data-cohort="2025" data-degree="masters" data-poster="img/posters/daniel.jpg">
+                                    <div class="student-photo-container">
+                                        <img src="img/research_team/cohort 2025/Daniel.jpg" alt="Daniel" class="student-photo">
+                                        <span class="student-status ongoing">Ongoing</span>
+                                    </div>
+                                    <div class="student-info">
+                                        <h4 class="student-name">ZHĀNG Yíngxiāo (Daniel)</h4>
+                                        <p class="student-project">"Next-Generation Secure Passwordless Web Authentication Using Face Recognition with Anti-Spoofing"</p>
+                                        <div class="student-meta">
+                                            <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:zhang.yingxiao@student.zy.cdut.edu.cn">zhang.yingxiao@student.zy.cdut.edu.cn</a></span>
+                                            <span class="student-year"><i class="fas fa-calendar"></i> Cohort 2025</span>
+                                        </div>
+                                        <span class="degree-tag undergraduate">BSc</span>
+                                        <button class="view-poster-btn" aria-label="View project poster" data-poster="img/posters/cohort 2025/daniel.jpg" data-student="ZHĀNG Yíngxiāo (Daniel)"><i class="fas fa-image"></i></button>
+                                    </div>
+                                </article>
+
+                                <div class="search-empty-state" id="searchEmpty2025">
+                                    <i class="fas fa-search"></i>
+                                    <h3>No matching students</h3>
+                                    <p>Try a different search term.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################################################-->
+                        <!--#########################################################################################################################-->
+
+                        <!-- 2024 Cohort -->
+                        <div class="cohort-tab-content" data-cohort="2024" data-type="supervised">
+                            <div class="cohort-panel-header">
+                                <h3 class="cohort-panel-title">2024 Cohort</h3>
+                                <span class="cohort-panel-count" data-cohort-count="2024">0 students</span>
+                            </div>
+                            <div class="student-grid">
+                                <div class="no-results" style="grid-column: 1 / -1;">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h3>No students yet</h3>
+                                    <p>Student data for the 2024 cohort will be added here.</p>
+                                </div>
+                                <div class="search-empty-state" id="searchEmpty2024">
+                                    <i class="fas fa-search"></i>
+                                    <h3>No matching students</h3>
+                                    <p>Try a different search term.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################################################-->
+                        <!--#########################################################################################################################-->
+
+                        <!-- 2023 Cohort -->
+                        <div class="cohort-tab-content" data-cohort="2023" data-type="supervised">
+                            <div class="cohort-panel-header">
+                                <h3 class="cohort-panel-title">2023 Cohort</h3>
+                                <span class="cohort-panel-count" data-cohort-count="2023">0 students</span>
+                            </div>
+                            <div class="student-grid">
+                                <div class="no-results" style="grid-column: 1 / -1;">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h3>No students yet</h3>
+                                    <p>Student data for the 2023 cohort will be added here.</p>
+                                </div>
+                                <div class="search-empty-state" id="searchEmpty2023">
+                                    <i class="fas fa-search"></i>
+                                    <h3>No matching students</h3>
+                                    <p>Try a different search term.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- 2024 Cohort -->
-                     <!--
-                    <div class="cohort-section" data-cohort="2024" data-type="supervised">
-                        <div class="cohort-header">
-                            <h3 class="cohort-year">2024 Cohort</h3>
-                            <span class="cohort-count">4 students</span>
-                        </div>
-                        <div class="student-grid">
-                            <article class="student-card" data-name="Chen Hao" data-project="Secure Cloud Data Sharing" data-type="supervised" data-cohort="2024">
-                                <div class="student-photo-container">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop" alt="Chen Hao" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Chen Hao</h4>
-                                    <p class="student-project">"Secure Cloud Data Sharing Using Attribute-Based Encryption"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:chen.hao@stu.cdut.edu.cn">chen.hao@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2024
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="Liu Ying" data-project="Blockchain for Healthcare" data-type="supervised" data-cohort="2024">
-                                <div class="student-photo-container">
-                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop" alt="Liu Ying" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Liu Ying</h4>
-                                    <p class="student-project">"Blockchain-Based Electronic Health Records Management"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:liu.ying@stu.cdut.edu.cn">liu.ying@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2024
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="Huang Jie" data-project="Edge Computing Security" data-type="supervised" data-cohort="2024">
-                                <div class="student-photo-container">
-                                    <div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Huang Jie</h4>
-                                    <p class="student-project">"Security Challenges in Edge Computing Environments"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:huang.jie@stu.cdut.edu.cn">huang.jie@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2024
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="Zhao Min" data-project="IoT Malware Detection" data-type="supervised" data-cohort="2024">
-                                <div class="student-photo-container">
-                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop" alt="Zhao Min" class="student-photo">
-                                    <span class="student-status ongoing">Ongoing</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Zhao Min</h4>
-                                    <p class="student-project">"Machine Learning Approaches for IoT Malware Detection"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:zhao.min@stu.cdut.edu.cn">zhao.min@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2024
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    -->
-
-                    <!-- 2023 Cohort -->
-                     <!--
-                    <div class="cohort-section" data-cohort="2023" data-type="supervised">
-                        <div class="cohort-header">
-                            <h3 class="cohort-year">2023 Cohort</h3>
-                            <span class="cohort-count">3 students</span>
-                        </div>
-                        <div class="student-grid">
-                            <article class="student-card" data-name="Wu Qiang" data-project="Smart Contract Vulnerability Analysis" data-type="supervised" data-cohort="2023">
-                                <div class="student-photo-container">
-                                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop" alt="Wu Qiang" class="student-photo">
-                                    <span class="student-status completed">Completed</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Wu Qiang</h4>
-                                    <p class="student-project">"Automated Smart Contract Vulnerability Detection Using Deep Learning"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:wu.qiang@stu.cdut.edu.cn">wu.qiang@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="Sun Li" data-project="Privacy-Preserving ML" data-type="supervised" data-cohort="2023">
-                                <div class="student-photo-container">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Sun Li" class="student-photo">
-                                    <span class="student-status completed">Completed</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Sun Li</h4>
-                                    <p class="student-project">"Privacy-Preserving Machine Learning for Healthcare Data"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:sun.li@stu.cdut.edu.cn">sun.li@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <article class="student-card" data-name="Zhou Ming" data-project="5G Network Security" data-type="supervised" data-cohort="2023">
-                                <div class="student-photo-container">
-                                    <div class="student-photo-placeholder">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <span class="student-status completed">Completed</span>
-                                </div>
-                                <div class="student-info">
-                                    <h4 class="student-name">Zhou Ming</h4>
-                                    <p class="student-project">"Security Architecture for 5G Network Slicing"</p>
-                                    <div class="student-meta">
-                                        <span class="student-email">
-                                            <i class="fas fa-envelope"></i>
-                                            <a href="mailto:zhou.ming@stu.cdut.edu.cn">zhou.ming@stu.cdut.edu.cn</a>
-                                        </span>
-                                        <span class="student-year">
-                                            <i class="fas fa-calendar"></i>
-                                            Cohort 2023
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    -->
                 </div>
 
                 <!-- Lab Members Section -->
@@ -1694,174 +952,122 @@
                         <p class="section-subtitle">Research assistants and junior researchers</p>
                     </div>
 
-                    <!--<div class="lab-intro">
-                        <p class="lab-intro-text">
-                            Our lab welcomes talented students who are passionate about cybersecurity, blockchain, and AI research. 
-                            These members contribute to ongoing projects while developing their research skills under mentorship.
-                        </p>
-                    </div>-->
+                    <!-- Lab Year Tabs -->
+                    <div class="lab-tabs-container" id="labTabsContainer">
+                        <div class="lab-tabs" id="labTabs"></div>
+                    </div>
 
-                    <div class="student-grid">
-                        <article class="student-card" data-name="HÉ Shān (Darron)" data-project="IoT Security" data-type="lab" data-year="2025">
+                    <!-- Lab Panel Header -->
+                    <div class="lab-panel-header" id="labPanelHeader">
+                        <h3 class="lab-panel-title" id="labPanelTitle">Lab Members</h3>
+                        <span class="lab-panel-count" id="labPanelCount">0 members</span>
+                    </div>
+
+                    <div class="student-grid" id="labGrid">
+                        <article class="student-card" data-name="HÉ Shān (Darron)" data-project="IoT Security" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Darron.jpg" alt="HÉ Shān (Darron)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Darron.jpg" alt="Darron" class="student-photo">
                             </div>
-                                                        <div class="student-info">
+                            <div class="student-info">
                                 <h4 class="student-name">HÉ Shān (Darron)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:heshan@student.zy.cdut.edu.cn">heshan@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:heshan@student.zy.cdut.edu.cn">heshan@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
 
-                        <article class="student-card" data-name="LÍ Dōngwěi (Devin)" data-project="Blockchain Research" data-type="lab" data-year="2025">
+                        <article class="student-card" data-name="LÍ Dōngwěi (Devin)" data-project="Blockchain Research" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Devin.jpg" alt="LÍ Dōngwěi (Devin)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Devin.jpg" alt="Devin" class="student-photo">
                             </div>
-                            
                             <div class="student-info">
                                 <h4 class="student-name">LÍ Dōngwěi (Devin)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:lidongwei@student.zy.cdut.edu.cn">lidongwei@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:lidongwei@student.zy.cdut.edu.cn">lidongwei@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
 
-                        <article class="student-card" data-name="XIÓNG Zhǐkāng (Alan)" data-project="Machine Learning" data-type="lab" data-year="2025">
+                        <article class="student-card" data-name="XIÓNG Zhǐkāng (Alan)" data-project="Machine Learning" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Alan.jpg" alt="XIÓNG Zhǐkāng (Alan)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Alan.jpg" alt="Alan" class="student-photo">
                             </div>
                             <div class="student-info">
                                 <h4 class="student-name">XIÓNG Zhǐkāng (Alan)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:xiongzhikang@student.zy.cdut.edu.cn">xiongzhikang@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:xiongzhikang@student.zy.cdut.edu.cn">xiongzhikang@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
-                        <!--
-                        <article class="student-card" data-name="Lin Xiaoyu" data-project="Smart City" data-type="lab" data-year="2025">
-                            <div class="student-photo-container">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Lin Xiaoyu" class="student-photo">
-                            </div>
-                            <div class="student-info">
-                                <h4 class="student-name">Lin Xiaoyu</h4>
-                                <p class="student-project">Research Assistant - Smart City Lab</p>
-                                <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:lin.xy@stu.cdut.edu.cn">lin.xy@stu.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
-                                </div>
-                            </div>
-                        </article>-->
 
-                        <article class="student-card" data-name="WÁNG Zǐfēi (Faye)" data-project="Cloud Security" data-type="lab" data-year="2025">
+                        <article class="student-card" data-name="WÁNG Zǐfēi (Faye)" data-project="Cloud Security" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Faye.jpg" alt="WÁNG Zǐfēi (Faye)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Faye.jpg" alt="Faye" class="student-photo">
                             </div>
                             <div class="student-info">
                                 <h4 class="student-name">WÁNG Zǐfēi (Faye)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:wangzifei@student.zy.cdut.edu.cn">wangzifei@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:wangzifei@student.zy.cdut.edu.cn">wangzifei@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
 
-                        <article class="student-card" data-name="YÚ Zhìyì (Spike)" data-project="Cloud Security" data-type="lab" data-year="2025">
+                        <article class="student-card" data-name="YÚ Zhìyì (Spike)" data-project="Cloud Security" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Spike.jpg" alt="LÍ Dōngwěi (Devin)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Spike.jpg" alt="Spike" class="student-photo">
                             </div>
                             <div class="student-info">
                                 <h4 class="student-name">YÚ Zhìyì (Spike)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:yuzhiyi@student.zy.cdut.edu.cn">yuzhiyi@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:yuzhiyi@student.zy.cdut.edu.cn">yuzhiyi@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
 
-                        <article class="student-card" data-name="XIÈ Zhèngkūn (Kun)" data-project="Cloud Security" data-type="lab" data-year="2025">
+                        <article class="student-card" data-name="XIÈ Zhèngkūn (Kun)" data-project="Cloud Security" data-type="lab" data-year="2025" data-degree="undergraduate">
                             <div class="student-photo-container">
-                                <img src="img/research_team/lab members/Kun.jpg" alt="LÍ Dōngwěi (Devin)" class="student-photo">
-                                <!--<div class="student-photo-placeholder">
-                                    <i class="fas fa-user"></i>
-                                </div>-->
+                                <img src="img/research_team/lab members/Kun.jpg" alt="Kun" class="student-photo">
                             </div>
                             <div class="student-info">
                                 <h4 class="student-name">XIÈ Zhèngkūn (Kun)</h4>
                                 <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
                                 <div class="student-meta">
-                                    <span class="student-email">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:xiezhengkun@student.zy.cdut.edu.cn">xiezhengkun@student.zy.cdut.edu.cn</a>
-                                    </span>
-                                    <span class="student-year">
-                                        <i class="fas fa-calendar"></i>
-                                        Joined 2025
-                                    </span>
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:xiezhengkun@student.zy.cdut.edu.cn">xiezhengkun@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
                                 </div>
+                                <span class="degree-tag undergraduate">BSc</span>
                             </div>
                         </article>
 
-
+                        <article class="student-card" data-name="金小津 JĪN Xiǎojīn (Cersei)" data-project="Cloud Security" data-type="lab" data-year="2025" data-degree="undergraduate">
+                            <div class="student-photo-container">
+                                <img src="img/research_team/lab members/Cersei.jpg" alt="Kun" class="student-photo">
+                            </div>
+                            <div class="student-info">
+                                <h4 class="student-name">金小津 JĪN Xiǎojīn (Cersei)</h4>
+                                <p class="student-project">Junior Research Assistant - IoT Security, & Artificial Intelligence</p>
+                                <div class="student-meta">
+                                    <span class="student-email"><i class="fas fa-envelope"></i><a href="mailto:jinxiaojin@student.zy.cdut.edu.cn">jinxiaojin@student.zy.cdut.edu.cn</a></span>
+                                    <span class="student-year"><i class="fas fa-calendar"></i> Joined 2025</span>
+                                </div>
+                                <span class="degree-tag undergraduate">BSc</span>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -1875,140 +1081,151 @@
         </main>
     </div>
 
+    <!-- Poster Modal -->
+    <div class="poster-modal" id="posterModal" aria-hidden="true">
+        <div class="poster-modal-content">
+            <button class="poster-modal-close" id="posterModalClose" aria-label="Close poster modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" class="poster-modal-image" id="posterModalImage">
+            <div class="poster-modal-caption">
+                <h4 id="posterModalTitle">Student Name</h4>
+                <p id="posterModalProject">Project Title</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Progress Bar
+        // ====== PROGRESS BAR ======
         function updateProgressBar() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
         }
-
         window.onscroll = updateProgressBar;
 
-        // Update Statistics
-        function updateStats() {
-            const supervised = document.querySelectorAll('.student-card[data-type="supervised"]').length;
-            const lab = document.querySelectorAll('.student-card[data-type="lab"]').length;
-            const completed = document.querySelectorAll('.student-status.completed').length;
+        // ====== COHORT TABS ======
+        const currentYear = new Date().getFullYear();
+        const earliestYear = 2024;
+        const cohortTabsContainer = document.getElementById('cohortTabs');
+        let activeTabYear = currentYear;
 
-            document.getElementById('totalSupervised').textContent = supervised;
-            document.getElementById('totalLab').textContent = lab;
-            document.getElementById('totalCompleted').textContent = completed;
-        }
-
-        // Search and Filter Functionality
-        const searchInput = document.getElementById('searchInput');
-        const filterChips = document.querySelectorAll('.filter-chip');
-        const studentCards = document.querySelectorAll('.student-card');
-        const cohortSections = document.querySelectorAll('.cohort-section');
-
-        function filterStudents() {
-            const query = searchInput.value.toLowerCase();
-            const activeFilter = document.querySelector('.filter-chip.active').dataset.filter;
-
-            studentCards.forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                const project = card.dataset.project.toLowerCase();
-                const type = card.dataset.type;
-                const cohort = card.dataset.cohort || '';
-                const year = card.dataset.year || '';
-
-                const matchesSearch = name.includes(query) || project.includes(query);
-                let matchesFilter = true;
-
-                if (activeFilter === 'supervised') {
-                    matchesFilter = type === 'supervised';
-                } else if (activeFilter === 'lab') {
-                    matchesFilter = type === 'lab';
-                } else if (['2025', '2024', '2023'].includes(activeFilter)) {
-                    matchesFilter = cohort === activeFilter || year === activeFilter;
+        function generateCohortTabs() {
+            const yearsWithData = [];
+            for (let y = currentYear; y >= earliestYear; y--) {
+                const panel = document.querySelector(`.cohort-tab-content[data-cohort="${y}"]`);
+                if (panel) {
+                    const cards = panel.querySelectorAll('.student-card');
+                    yearsWithData.push({ year: y, count: cards.length });
                 }
+            }
 
-                if (matchesSearch && matchesFilter) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+            cohortTabsContainer.innerHTML = '';
+            yearsWithData.forEach(({ year, count }, index) => {
+                const tab = document.createElement('button');
+                tab.className = 'cohort-tab' + (index === 0 ? ' active' : '');
+                tab.dataset.tab = year;
+                tab.innerHTML = `${year} <span class="cohort-count-badge">${count}</span>`;
+                tab.addEventListener('click', () => switchCohortTab(year));
+                cohortTabsContainer.appendChild(tab);
             });
 
-            // Hide empty cohort sections
-            cohortSections.forEach(section => {
-                const visibleCards = section.querySelectorAll('.student-card:not(.hidden)');
-                if (visibleCards.length === 0) {
-                    section.style.display = 'none';
-                } else {
-                    section.style.display = 'block';
-                    // Update count
-                    const countBadge = section.querySelector('.cohort-count');
-                    countBadge.textContent = `${visibleCards.length} student${visibleCards.length !== 1 ? 's' : ''}`;
-                }
-            });
-
-            // Show/hide entire sections based on filter
-            const supervisedSection = document.getElementById('supervisedSection');
-            const labSection = document.getElementById('labSection');
-
-            if (activeFilter === 'lab') {
-                supervisedSection.style.display = 'none';
-                labSection.style.display = 'block';
-            } else if (activeFilter === 'supervised' || ['2025', '2024', '2023'].includes(activeFilter)) {
-                supervisedSection.style.display = 'block';
-                labSection.style.display = activeFilter === 'supervised' ? 'none' : 'block';
-            } else {
-                supervisedSection.style.display = 'block';
-                labSection.style.display = 'block';
+            if (yearsWithData.length > 0) {
+                activeTabYear = yearsWithData[0].year;
+                switchCohortTab(activeTabYear, false);
             }
         }
 
-        // Filter chip click handlers
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                filterChips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                filterStudents();
+        function switchCohortTab(year, fromUserClick = true) {
+            activeTabYear = year;
+            document.querySelectorAll('.cohort-tab').forEach(tab => {
+                tab.classList.toggle('active', parseInt(tab.dataset.tab) === year);
+            });
+            document.querySelectorAll('.cohort-tab-content').forEach(panel => {
+                panel.classList.toggle('active', parseInt(panel.dataset.cohort) === year);
+            });
+            if (fromUserClick && searchInput.value.trim()) {
+                performSearch(searchInput.value.trim());
+            }
+        }
+
+        // ====== SEARCH ======
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+        const searchResultsCount = document.getElementById('searchResultsCount');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            searchClear.classList.toggle('visible', query.length > 0);
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                clearSearch();
+            }
+        });
+
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchClear.classList.remove('visible');
+            clearSearch();
+            searchInput.focus();
+        });
+
+
+
+        // ====== POSTER MODAL ======
+        const posterModal = document.getElementById('posterModal');
+        const posterModalImage = document.getElementById('posterModalImage');
+        const posterModalClose = document.getElementById('posterModalClose');
+        const posterModalTitle = document.getElementById('posterModalTitle');
+        const posterModalProject = document.getElementById('posterModalProject');
+
+        document.querySelectorAll('.view-poster-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                posterModalImage.src = btn.dataset.poster;
+                posterModalImage.alt = `${btn.dataset.student} - Project Poster`;
+                posterModalTitle.textContent = btn.dataset.student;
+                const card = btn.closest('.student-card');
+                posterModalProject.textContent = card ? card.dataset.project : '';
+                posterModal.classList.add('active');
+                posterModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        // Search input handler
-        searchInput.addEventListener('input', filterStudents);
+        function closePosterModal() {
+            posterModal.classList.remove('active');
+            posterModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            posterModalImage.src = '';
+        }
 
-        // Sidebar Toggle
+        posterModalClose.addEventListener('click', closePosterModal);
+        posterModal.addEventListener('click', (e) => { if (e.target === posterModal) closePosterModal(); });
+
+        // ====== SIDEBAR TOGGLE ======
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebar = document.getElementById('sidebar');
-
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-
+        sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
         document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 1024 && 
-                !sidebar.contains(e.target) && 
-                !sidebarToggle.contains(e.target) && 
-                sidebar.classList.contains('active')) {
+            if (window.innerWidth <= 1024 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
             }
         });
 
-        // Mobile Navigation
+        // ====== MOBILE NAV ======
         const mobileNavToggle = document.getElementById('mobileNavToggle');
         const mobileNav = document.getElementById('mobileNav');
         const mobileNavIcon = document.getElementById('mobileNavIcon');
-
         mobileNavToggle.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
             const isExpanded = mobileNav.classList.contains('active');
             mobileNavToggle.setAttribute('aria-expanded', isExpanded);
-            
-            if (isExpanded) {
-                mobileNavIcon.classList.remove('fa-bars');
-                mobileNavIcon.classList.add('fa-times');
-            } else {
-                mobileNavIcon.classList.remove('fa-times');
-                mobileNavIcon.classList.add('fa-bars');
-            }
+            mobileNavIcon.classList.toggle('fa-bars', !isExpanded);
+            mobileNavIcon.classList.toggle('fa-times', isExpanded);
         });
-
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('active');
@@ -2018,51 +1235,230 @@
             });
         });
 
-        document.addEventListener('click', (e) => {
-            if (!mobileNav.contains(e.target) && 
-                !mobileNavToggle.contains(e.target) && 
-                mobileNav.classList.contains('active')) {
-                mobileNav.classList.remove('active');
-                mobileNavToggle.setAttribute('aria-expanded', 'false');
-                mobileNavIcon.classList.remove('fa-times');
-                mobileNavIcon.classList.add('fa-bars');
-            }
-        });
-
-        // Keyboard Navigation
+        // ====== KEYBOARD ======
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                }
+                if (sidebar.classList.contains('active')) sidebar.classList.remove('active');
                 if (mobileNav.classList.contains('active')) {
                     mobileNav.classList.remove('active');
                     mobileNavToggle.setAttribute('aria-expanded', 'false');
                     mobileNavIcon.classList.remove('fa-times');
                     mobileNavIcon.classList.add('fa-bars');
                 }
+                closePosterModal();
             }
         });
 
-        // Page Transition
+        // ====== PAGE TRANSITION ======
         document.querySelectorAll('a[href$=".html"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 if (!link.classList.contains('active')) {
                     e.preventDefault();
-                    const href = link.getAttribute('href');
-                    const transition = document.getElementById('pageTransition');
-                    
-                    transition.classList.add('active');
-                    
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 500);
+                    document.getElementById('pageTransition').classList.add('active');
+                    setTimeout(() => { window.location.href = link.getAttribute('href'); }, 500);
                 }
             });
         });
 
-        // Initialize
-        updateStats();
+        // ====== LAB TABS ======
+        const labTabsContainer = document.getElementById('labTabs');
+        const labPanelTitle = document.getElementById('labPanelTitle');
+        const labPanelCount = document.getElementById('labPanelCount');
+        let activeLabYear = null;
+
+        function generateLabTabs() {
+            const labCards = document.querySelectorAll('#labGrid .student-card');
+            const yearCounts = {};
+
+            labCards.forEach(card => {
+                const year = card.dataset.year;
+                if (year) {
+                    yearCounts[year] = (yearCounts[year] || 0) + 1;
+                }
+            });
+
+            const sortedYears = Object.keys(yearCounts).sort((a, b) => parseInt(b) - parseInt(a));
+
+            labTabsContainer.innerHTML = '';
+            sortedYears.forEach((year, index) => {
+                const tab = document.createElement('button');
+                tab.className = 'lab-tab' + (index === 0 ? ' active' : '');
+                tab.dataset.labTab = year;
+                tab.innerHTML = `${year} <span class="lab-count-badge">${yearCounts[year]}</span>`;
+                tab.addEventListener('click', () => switchLabTab(year));
+                labTabsContainer.appendChild(tab);
+            });
+
+            if (sortedYears.length > 0) {
+                activeLabYear = sortedYears[0];
+                switchLabTab(activeLabYear, false);
+            }
+        }
+
+        function switchLabTab(year, fromUserClick = true) {
+            activeLabYear = year;
+            document.querySelectorAll('.lab-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.labTab === year);
+            });
+
+            const labCards = document.querySelectorAll('#labGrid .student-card');
+            let visibleCount = 0;
+            labCards.forEach(card => {
+                const cardYear = card.dataset.year;
+                const isMatch = cardYear === year;
+                card.classList.toggle('hidden', !isMatch);
+                if (isMatch) visibleCount++;
+            });
+
+            labPanelTitle.textContent = `${year} Lab Members`;
+            labPanelCount.textContent = `${visibleCount} member${visibleCount !== 1 ? 's' : ''}`;
+
+            if (fromUserClick && searchInput.value.trim()) {
+                performSearch(searchInput.value.trim());
+            }
+        }
+
+        function filterLabTabsInSearch(matchingLabYears) {
+            document.querySelectorAll('.lab-tab').forEach(tab => {
+                const year = tab.dataset.labTab;
+                tab.classList.toggle('active', matchingLabYears.includes(year));
+                tab.style.opacity = matchingLabYears.includes(year) ? '1' : '0.4';
+            });
+        }
+
+        function resetLabTabs() {
+            document.querySelectorAll('.lab-tab').forEach(tab => {
+                const year = tab.dataset.labTab;
+                tab.classList.toggle('active', year === activeLabYear);
+                tab.style.opacity = '1';
+            });
+            switchLabTab(activeLabYear, false);
+        }
+
+        // ====== SEARCH (overrides earlier declarations) ======
+        performSearch = function(query) {
+            const lowerQuery = query.toLowerCase();
+            let totalMatches = 0;
+            const matchingYears = [];
+
+            // Search supervised students
+            document.querySelectorAll('.cohort-tab-content').forEach(panel => {
+                const year = parseInt(panel.dataset.cohort);
+                let panelMatches = 0;
+
+                panel.querySelectorAll('.student-card').forEach(card => {
+                    const name = (card.dataset.name || '').toLowerCase();
+                    const project = (card.dataset.project || '').toLowerCase();
+                    const degree = (card.dataset.degree || '').toLowerCase();
+                    const matches = name.includes(lowerQuery) || project.includes(lowerQuery) || degree.includes(lowerQuery);
+
+                    if (matches) {
+                        card.classList.remove('hidden');
+                        panelMatches++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                const emptyState = panel.querySelector('.search-empty-state');
+                if (emptyState) {
+                    const noResults = panel.querySelector('.no-results');
+                    if (panelMatches === 0) {
+                        emptyState.classList.add('visible');
+                        if (noResults) noResults.style.display = 'none';
+                    } else {
+                        emptyState.classList.remove('visible');
+                        if (noResults) noResults.style.display = '';
+                    }
+                }
+
+                if (panelMatches > 0) {
+                    totalMatches += panelMatches;
+                    matchingYears.push(year);
+                }
+            });
+
+            // Search lab members
+            const matchingLabYears = [];
+            const labCards = document.querySelectorAll('#labGrid .student-card');
+            let labMatches = 0;
+
+            labCards.forEach(card => {
+                const name = (card.dataset.name || '').toLowerCase();
+                const project = (card.dataset.project || '').toLowerCase();
+                const degree = (card.dataset.degree || '').toLowerCase();
+                const year = card.dataset.year;
+                const matches = name.includes(lowerQuery) || project.includes(lowerQuery) || degree.includes(lowerQuery);
+
+                if (matches) {
+                    card.classList.remove('hidden');
+                    labMatches++;
+                    if (year && !matchingLabYears.includes(year)) {
+                        matchingLabYears.push(year);
+                    }
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            totalMatches += labMatches;
+
+            // Update cohort tabs UI
+            document.querySelectorAll('.cohort-tab-content').forEach(panel => {
+                const year = parseInt(panel.dataset.cohort);
+                if (matchingYears.includes(year)) {
+                    panel.classList.add('active');
+                    panel.classList.add('search-mode');
+                } else {
+                    panel.classList.remove('active');
+                    panel.classList.remove('search-mode');
+                }
+            });
+
+            document.querySelectorAll('.cohort-tab').forEach(tab => {
+                const year = parseInt(tab.dataset.tab);
+                tab.classList.toggle('active', matchingYears.includes(year));
+                tab.style.opacity = matchingYears.includes(year) ? '1' : '0.4';
+            });
+
+            // Update lab tabs UI
+            filterLabTabsInSearch(matchingLabYears);
+            if (labMatches > 0 && matchingLabYears.length > 0) {
+                labPanelTitle.textContent = `Lab Search Results`;
+                labPanelCount.textContent = `${labMatches} member${labMatches !== 1 ? 's' : ''}`;
+            }
+
+            searchResultsCount.textContent = `${totalMatches} result${totalMatches !== 1 ? 's' : ''} for "${query}"`;
+            searchResultsCount.classList.add('visible');
+        };
+
+        clearSearch = function() {
+            document.querySelectorAll('.student-card').forEach(card => {
+                card.classList.remove('hidden');
+            });
+
+            document.querySelectorAll('.search-empty-state').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.no-results').forEach(el => el.style.display = '');
+
+            document.querySelectorAll('.cohort-tab-content').forEach(panel => {
+                panel.classList.remove('search-mode');
+                const year = parseInt(panel.dataset.cohort);
+                panel.classList.toggle('active', year === activeTabYear);
+            });
+
+            document.querySelectorAll('.cohort-tab').forEach(tab => {
+                const year = parseInt(tab.dataset.tab);
+                tab.classList.toggle('active', year === activeTabYear);
+                tab.style.opacity = '1';
+            });
+
+            resetLabTabs();
+            searchResultsCount.classList.remove('visible');
+        };
+
+        // ====== INIT ======
+        generateCohortTabs();
+        generateLabTabs();
     </script>
 </body>
 </html>
